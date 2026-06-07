@@ -22,3 +22,4 @@ Alles dazwischen gehört zum Block
 lets = veränderbar (man kan die Variable komplett neu setzen )
 const = Feste zuweisung (man kan nur den Inhalt ändern, aber nicht ersetzen)
 Array = eine einfache liste
+&& = heist und also = Bedingung 1 UND Bedingung 2 müssen beide stimmen damit was passiert 
