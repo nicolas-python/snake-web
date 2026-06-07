@@ -14,6 +14,7 @@ let direction = "right";
 let paused = false;
 
 let food = { x: 200, y: 200 };
+let score = 0;
 
 document.addEventListener("keydown", function(event)
 {
@@ -37,9 +38,20 @@ function moveSnake()
     if (direction === "up") head.y -= 20;
     if (direction === "down") head.y += 20;
 
-    //vorne einfügen und hinten entfernen
+
     snake.unshift(head);
-    snake.pop();
+
+    //vorne einfügen und hinten entfernen
+    //food kollision check
+    if (snake[0].x === food.x && snake[0].y === food.y)             //&& = und = Bedingung 1 UND Bedingung 2 müssen beide stimmen
+    {
+        score= score +1;
+        spawnFood();
+    }
+    else
+    {
+        snake.pop();
+    }
 }
 
 //snake zeichnung(canvas)
@@ -72,16 +84,9 @@ function gameLoop()
 {
     ctx.clearRect(0, 0, canvas.width, canvas.height);           //clearRect = Bildschirm reset pro Frame
     moveSnake();
-
-    //food kollesion check
-    if (snake[0].x === food.x && snake[0].y === food.y) {            //&& = und = Bedingung 1 UND Bedingung 2 müssen beide stimmen
-    spawnFood();
-    }
-
     drawSnake();
     drawFood();
 }
 
 setInterval(gameLoop, 200);
-
 
