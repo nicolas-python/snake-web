@@ -13,7 +13,10 @@ let snake = [                               //let = veränderbar
 let direction = "right";
 let paused = false;
 
-document.addEventListener("keydown", function(event) {
+let food = { x: 200, y: 200 };
+
+document.addEventListener("keydown", function(event)
+{
     if (event.key === "ArrowLeft") direction = "left";
     if (event.key === "ArrowRight") direction = "right";
     if (event.key === "ArrowUp") direction = "up";
@@ -23,7 +26,8 @@ document.addEventListener("keydown", function(event) {
 });
 
 //bewegung
-function moveSnake() {
+function moveSnake()
+{
     if (paused) return;
 
     let head = { x: snake[0].x, y: snake[0].y };
@@ -49,11 +53,19 @@ function drawSnake()
     }
 }
 
+function drawFood()
+{
+    ctx.fillStyle = "yellow";
+    ctx.fillRect(food.x, food.y, 20, 20);
+}
+
 //game loop
-function gameLoop() {
+function gameLoop()
+{
     ctx.clearRect(0, 0, canvas.width, canvas.height);           //clearRect = Bildschirm reset pro Frame
     moveSnake();
     drawSnake();
+    drawFood();
 }
 
 setInterval(gameLoop, 200);
