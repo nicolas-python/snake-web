@@ -59,11 +59,25 @@ function drawFood()
     ctx.fillRect(food.x, food.y, 20, 20);
 }
 
+function spawnFood()
+{
+    food = {
+        x: Math.floor(Math.random() * 20) * 20,
+        y: Math.floor(Math.random() * 20) * 20
+    };
+}
+
 //game loop
 function gameLoop()
 {
     ctx.clearRect(0, 0, canvas.width, canvas.height);           //clearRect = Bildschirm reset pro Frame
     moveSnake();
+
+    //food kollesion check
+    if (snake[0].x === food.x && snake[0].y === food.y) {            //&& = und = Bedingung 1 UND Bedingung 2 müssen beide stimmen
+    spawnFood();
+    }
+
     drawSnake();
     drawFood();
 }
