@@ -18,3 +18,7 @@ java böcke schreiben = Struktur durch Klammern
 { = Block startet
 } = Block endet
 Alles dazwischen gehört zum Block
+
+lets = veränderbar (man kan die Variable komplett neu setzen )
+const = Feste zuweisung (man kan nur den Inhalt ändern, aber nicht ersetzen)
+Array = eine einfache liste

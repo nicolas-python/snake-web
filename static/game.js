@@ -4,9 +4,10 @@ console.log("game.js geladen");
 const canvas = document.getElementById("game");         //zugriff auf das canvas-element aus HTML
 const ctx = canvas.getContext("2d");                                //benutze den 2D-Zeichenstift für das Canvas
 
-//startpunkt snake
-let snakeX = 100;
-let snakeY = 100;
+//startpunkt und kopf snake
+let snake = [                               //let = veränderbar
+  { x: 100, y: 100 }
+];
 
 //steuerung
 let direction = "right";
@@ -25,17 +26,27 @@ document.addEventListener("keydown", function(event) {
 function moveSnake() {
     if (paused) return;
 
-    if (direction === "right") snakeX += 20;
-    if (direction === "left") snakeX -= 20;
-    if (direction === "up") snakeY -= 20;
-    if (direction === "down") snakeY += 20;
+    let head = { x: snake[0].x, y: snake[0].y };
+
+    if (direction === "right") head.x += 20;
+    if (direction === "left") head.x-= 20;
+    if (direction === "up") head.y -= 20;
+    if (direction === "down") head.y += 20;
+
+    //vorne einfügen und hinten entfernen
+    snake.unshift(head);
+    snake.pop();
 }
 
 //snake zeichnung(canvas)
 function drawSnake()
 {
     ctx.fillStyle = "green";
-    ctx.fillRect(snakeX, snakeY, 20, 20);
+
+    for (let part of snake)
+    {
+        ctx.fillRect(part.x, part.y, 20, 20);
+    }
 }
 
 //game loop
