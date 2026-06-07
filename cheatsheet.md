@@ -13,3 +13,8 @@ HTML	<!-- Kommentar -->
 ctx = Zeichenwerkzeug (2D Kontext)
 Rechtecke zeichnen: ctx.fillRect(x, y, breite, höhe)
 Farben setzen: ctx.fillStyle = "green
+
+java böcke schreiben = Struktur durch Klammern
+{ = Block startet
+} = Block endet
+Alles dazwischen gehört zum Block
