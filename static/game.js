@@ -38,6 +38,18 @@ function moveSnake()
     if (direction === "up") head.y -= 20;
     if (direction === "down") head.y += 20;
 
+    //wand kollesion
+    if (
+        head.x < 0 ||
+        head.y < 0 ||
+        head.x >= canvas.width ||
+        head.y >= canvas.height)
+    {
+        alert("Game Over");
+        location.reload();
+        return;
+    }
+
 
     snake.unshift(head);
 
