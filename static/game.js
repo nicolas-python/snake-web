@@ -13,8 +13,10 @@ let snake = [                               //let = veränderbar
 let direction = "right";
 let paused = false;
 
+
 let food = { x: 200, y: 200 };
 let score = 0;
+
 
 document.addEventListener("keydown", function(event)
 {
@@ -45,8 +47,7 @@ function moveSnake()
         head.x >= canvas.width ||
         head.y >= canvas.height)
     {
-        alert("Game Over");
-        location.reload();
+        gameOver();
         return;
     }
 
@@ -91,14 +92,35 @@ function spawnFood()
     };
 }
 
+let gameRunning = true;
+
+
+function resetGame()
+{
+    snake = [{ x: 100, y: 100 }];
+    direction = "right";
+    gameRunning = true;
+}
+
+function gameOver()
+{
+    gameRunning = false;
+    alert("Game Over");
+    resetGame();
+}
+
 //game loop
 function gameLoop()
 {
+    if (!gameRunning) return;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);           //clearRect = Bildschirm reset pro Frame
+
     moveSnake();
     drawSnake();
     drawFood();
 }
 
 setInterval(gameLoop, 200);
+
 
