@@ -105,6 +105,17 @@ function resetGame()
 function gameOver()
 {
     gameRunning = false;
+
+    console.log("Score:", score);
+    fetch("/save_score", {                      //fetch = sendet Daten an Server
+        method: "POST",                                   //post = Daten werden gesendet
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({                      // JSON= JS → JSON Format
+            score: score
+        })
+    });
     alert("Game Over");
     resetGame();
 }
@@ -112,7 +123,7 @@ function gameOver()
 //game loop
 function gameLoop()
 {
-    if (!gameRunning) return;
+    if (!gameRunning) return;                                          //!=dreht den Wert um
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);           //clearRect = Bildschirm reset pro Frame
 
