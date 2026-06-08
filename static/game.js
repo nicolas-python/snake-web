@@ -51,10 +51,16 @@ function moveSnake()
         return;
     }
 
+    // selbst kollision
+    if (checkSelfCollision(head.x, head.y))
+    {
+        gameOver();
+        return;
+    }
 
     snake.unshift(head);
 
-    //vorne einfügen und hinten entfernen
+        //vorne einfügen und hinten entfernen
     //food kollision check
     if (snake[0].x === food.x && snake[0].y === food.y)             //&& = und = Bedingung 1 UND Bedingung 2 müssen beide stimmen
     {
@@ -66,6 +72,21 @@ function moveSnake()
         snake.pop();
     }
 }
+
+
+function checkSelfCollision(x, y)
+{
+    for (let i = 1; i < snake.length; i++)
+    {
+        if (x === snake[i].x && y === snake[i].y)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 
 //snake zeichnung(canvas)
 function drawSnake()
@@ -106,7 +127,6 @@ function gameOver()
 {
     gameRunning = false;
 
-    console.log("Score:", score);
     fetch("/save_score", {                      //fetch = sendet Daten an Server
         method: "POST",                                   //post = Daten werden gesendet
         headers: {
