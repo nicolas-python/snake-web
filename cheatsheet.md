@@ -1,3 +1,4 @@
+F12 drücken für Konsole in Browser 
 ## Aufbau wofür was
 - HTML = Struktur
 - JS = Logik im Browser
@@ -34,4 +35,7 @@ POST = Art der anfrage
 JSON = Ein Datenformat   ( Standardformat für Daten zwischen JS und Python)
 JSON.stringify() = wandelt JS Objekt → JSON Text
 request.get_json() = holt die daten die JS geschickt hat 
+console.log() = print im Browser (JavaScript)
+
+
 

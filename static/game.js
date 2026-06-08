@@ -120,9 +120,10 @@ function resetGame()
 {
     snake = [{ x: 100, y: 100 }];
     direction = "right";
+    score = 0;
     gameRunning = true;
+    spawnFood();
 }
-
 function gameOver()
 {
     gameRunning = false;
