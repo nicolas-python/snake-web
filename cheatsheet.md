@@ -37,5 +37,11 @@ JSON.stringify() = wandelt JS Objekt → JSON Text
 request.get_json() = holt die daten die JS geschickt hat 
 console.log() = print im Browser (JavaScript)
 
+## HTML
+div =einfach ein Container im HTML
+getElementById= Verbindung JS ↔ HTML
+innerText= Text im HTML ändern
+${score}= setzt Variable in Text einsetzen  (${} wird auch Template Literal / String Interpolation genannt )
+addEventListener=reagiert auf taste wie event in pyhton 
 
 
