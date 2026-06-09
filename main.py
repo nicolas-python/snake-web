@@ -1,5 +1,5 @@
 from flask import Flask, render_template ,request, jsonify
-from database import save_score
+from database import init_db,save_score
 
 app = Flask(__name__)                           #erstellt die flask-app
 @app.route('/')                                 #wenn jemand die Route '/'im Browser aufruft, wird diese Funktion ausgeführt
@@ -17,4 +17,5 @@ def save_score_route():
 
 
 if __name__ == '__main__':                      #entscheidet ob Programm startet
+    init_db()                                   #tabelle erstellen
     app.run(debug=True)                         #sorgt für automatisches Neustarten
