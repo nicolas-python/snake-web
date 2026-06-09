@@ -16,9 +16,10 @@ let paused = false;
 
 let food = { x: 200, y: 200 };
 let score = 0;
-
+const hud = document.getElementById("hud");     //speichert hud ab in neuer variable hud
 
 document.addEventListener("keydown", function(event)
+
 {
     if (event.key === "ArrowLeft") direction = "left";
     if (event.key === "ArrowRight") direction = "right";
@@ -124,6 +125,12 @@ function resetGame()
     gameRunning = true;
     spawnFood();
 }
+
+function updateHUD()
+{
+    hud.innerText = `Score: ${score}`;                      //${} = setze die variable hier in den text
+}
+
 function gameOver()
 {
     gameRunning = false;
@@ -151,6 +158,8 @@ function gameLoop()
     moveSnake();
     drawSnake();
     drawFood();
+
+    updateHUD();
 }
 
 setInterval(gameLoop, 200);
