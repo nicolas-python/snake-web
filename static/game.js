@@ -51,6 +51,29 @@ savePlayerButton.addEventListener("click", function()
     });
 });
 
+savePlayerButton.addEventListener("click", function()
+{
+    const playerName = playerNameInput.value;
+
+    fetch("/create_player", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: playerName
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Debug in Konsole
+        hud.innerText = data.message; // Anzeige im Spiel
+    })
+    .catch(error => {
+        console.error("Fehler:", error);
+    });
+})
+
 //bewegung
 function moveSnake()
 {

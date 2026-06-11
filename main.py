@@ -13,7 +13,7 @@ def save_score_route():
 
     save_score("player1", score, 0)  # aus deiner alten DB-Funktion
 
-    return jsonify({"status": "ok"})
+    return jsonify({"status": "ok","message": "Score gespeichert!"})
 
 @app.route("/create_player", methods=["POST"])
 def create_player():
@@ -22,8 +22,7 @@ def create_player():
     name = data["name"]
 
     save_player(name)
-
-    return jsonify({"status": "ok"})
+    return jsonify({"status": "ok","message": f"Der Name '{name}' wurde übernommen!"})
 
 if __name__ == '__main__':                      #entscheidet ob Programm startet
     init_db()                                   #tabelle erstellen
