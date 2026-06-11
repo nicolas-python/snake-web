@@ -4,12 +4,10 @@ console.log("game.js geladen");
 let food = { x: 200, y: 200 };
 let score = 0;
 let activePlayer = null;
+
 const hud = document.getElementById("hud");     //speichert hud ab in neuer variable hud
 const playerNameInput = document.getElementById("playerName");
 const savePlayerButton = document.getElementById("savePlayer");
-
-
-
 
 const canvas = document.getElementById("game");         //zugriff auf das canvas-element aus HTML
 const ctx = canvas.getContext("2d");                                //benutze den 2D-Zeichenstift für das Canvas
@@ -35,6 +33,7 @@ document.addEventListener("keydown", function(event)
     if (event.key === "p") paused = !paused;
 });
 
+
 // Spieler speichern
 savePlayerButton.addEventListener("click", function()
 {
@@ -52,13 +51,14 @@ savePlayerButton.addEventListener("click", function()
     .then(response => response.json())
     .then(data => {
         console.log(data); // Debug in Konsole
-        activePlayer = playerName;
         hud.innerText = data.message; // Anzeige im Spiel
     })
     .catch(error => {
         console.error("Fehler:", error);
     });
 })
+
+
 
 //bewegung
 function moveSnake()
@@ -94,7 +94,7 @@ function moveSnake()
 
         //vorne einfügen und hinten entfernen
     //food kollision check
-    if (snake[0].x === food.x && snake[0].y === food.y)             //&& = und = Bedingung 1 UND Bedingung 2 müssen beide stimmen
+    if (snake[0].x === food.x && snake[0].y === food.y)
     {
         score= score +1;
         spawnFood();
@@ -176,6 +176,7 @@ function gameOver()
             score: score
         })
     });
+
     alert("Game Over");
     resetGame();
 }
@@ -183,9 +184,9 @@ function gameOver()
 //game loop
 function gameLoop()
 {
-    if (!gameRunning) return;                                          //!=dreht den Wert um
+    if (!gameRunning) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);           //clearRect = Bildschirm reset pro Frame
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     moveSnake();
     drawSnake();
@@ -195,5 +196,3 @@ function gameLoop()
 }
 
 setInterval(gameLoop, 200);
-
-

@@ -1,35 +1,27 @@
 <!-- Struktur der Seite -->
 <!DOCTYPE html>                         <!--<!DOCTYPE html>=Diese Datei ist eine moderne HTML5-Webseite -->
 <html lang="de">                        <!-- Beginn der HTML-Seite, Sprache = Deutsch sagt an deutscher inhalt -->
+
 <head>                                  <!--  enthält informationen über die webseite, die nicht direkt angezeigt werden -->
     <meta charset="UTF-8">
     <title>Snake Game</title>
 </head>
+
 <body>                                  <!-- zeigt an was ich sehen kan auf der website -->
 
     <h1>Welcome to Snake</h1>           <!-- h1 Überschrift ebene 1 -->
 
-<!-- Spielfeld -->
+    <!-- Spielfeld -->
     <canvas id="game" width="400" height="400" style="border:1px solid black;"></canvas>
 
     <!-- Spieler Erstellen -->
     <input id="playerName" placeholder="Name">
     <button id="savePlayer">Spieler anlegen</button>
 
-
     <!-- score label erstellen -->
     <div id="hud">                              <!-- div = container -->
       Score: 0
     </div>
-
-
-
-
-
-
-
-
-
 
     <script src="/static/game.js"></script>         <!-- lade das script game.js aus dem static ordner und fuhrt es aus -->
 
