@@ -6,6 +6,7 @@ let score = 0;
 let activePlayer = null;
 
 const hud = document.getElementById("hud");     //speichert hud ab in neuer variable hud
+
 const playerNameInput = document.getElementById("playerName");
 const savePlayerButton = document.getElementById("savePlayer");
 
@@ -50,6 +51,7 @@ savePlayerButton.addEventListener("click", function()
     })
     .then(response => response.json())
     .then(data => {
+        activePlayer = playerName
         console.log(data); // Debug in Konsole
         hud.innerText = data.message; // Anzeige im Spiel
     })
@@ -185,6 +187,8 @@ function gameOver()
 function gameLoop()
 {
     if (!gameRunning) return;
+
+    if (!activePlayer) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
