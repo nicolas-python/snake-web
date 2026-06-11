@@ -9,9 +9,12 @@ def start_page():
 @app.route("/save_score", methods=["POST"])       #@app.route() = legt eine URL (Route) fest und verbindet sie mit einer Python-Funktion
 def save_score_route():
     data = request.get_json()
+
+    name = data["name"]
+    save_player(name)
     score = data["score"]
 
-    save_score("player1", score, 0)  # aus deiner alten DB-Funktion
+    save_score(name, score, 0)  # aus deiner alten DB-Funktion
 
     return jsonify({"status": "ok","message": "Score gespeichert!"})
 

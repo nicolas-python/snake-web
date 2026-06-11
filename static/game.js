@@ -3,6 +3,7 @@ console.log("game.js geladen");
 
 let food = { x: 200, y: 200 };
 let score = 0;
+let activePlayer = null;
 const hud = document.getElementById("hud");     //speichert hud ab in neuer variable hud
 const playerNameInput = document.getElementById("playerName");
 const savePlayerButton = document.getElementById("savePlayer");
@@ -41,22 +42,6 @@ savePlayerButton.addEventListener("click", function()
 
     fetch("/create_player", {
         method: "POST",
-        headers:
-            {
-            "Content-Type": "application/json"
-            },
-        body: JSON.stringify({
-            name: playerName
-        })
-    });
-});
-
-savePlayerButton.addEventListener("click", function()
-{
-    const playerName = playerNameInput.value;
-
-    fetch("/create_player", {
-        method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
@@ -67,6 +52,7 @@ savePlayerButton.addEventListener("click", function()
     .then(response => response.json())
     .then(data => {
         console.log(data); // Debug in Konsole
+        activePlayer = playerName;
         hud.innerText = data.message; // Anzeige im Spiel
     })
     .catch(error => {
@@ -186,6 +172,7 @@ function gameOver()
             "Content-Type": "application/json"
         },
         body: JSON.stringify({                      // JSON= JS → JSON Format
+            name: activePlayer,
             score: score
         })
     });
