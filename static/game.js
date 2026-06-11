@@ -1,6 +1,15 @@
 //Snake Game Logik (Browser)
 console.log("game.js geladen");
 
+let food = { x: 200, y: 200 };
+let score = 0;
+const hud = document.getElementById("hud");     //speichert hud ab in neuer variable hud
+const playerNameInput = document.getElementById("playerName");
+const savePlayerButton = document.getElementById("savePlayer");
+
+
+
+
 const canvas = document.getElementById("game");         //zugriff auf das canvas-element aus HTML
 const ctx = canvas.getContext("2d");                                //benutze den 2D-Zeichenstift für das Canvas
 
@@ -14,10 +23,6 @@ let direction = "right";
 let paused = false;
 
 
-let food = { x: 200, y: 200 };
-let score = 0;
-const hud = document.getElementById("hud");     //speichert hud ab in neuer variable hud
-
 document.addEventListener("keydown", function(event)
 
 {
@@ -27,6 +32,23 @@ document.addEventListener("keydown", function(event)
     if (event.key === "ArrowDown") direction = "down";
 
     if (event.key === "p") paused = !paused;
+});
+
+// Spieler speichern
+savePlayerButton.addEventListener("click", function()
+{
+    const playerName = playerNameInput.value;
+
+    fetch("/create_player", {
+        method: "POST",
+        headers:
+            {
+            "Content-Type": "application/json"
+            },
+        body: JSON.stringify({
+            name: playerName
+        })
+    });
 });
 
 //bewegung

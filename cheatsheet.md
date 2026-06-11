@@ -43,5 +43,7 @@ getElementById= Verbindung JS ↔ HTML
 innerText= Text im HTML ändern
 ${score}= setzt Variable in Text einsetzen  (${} wird auch Template Literal / String Interpolation genannt )
 addEventListener=reagiert auf taste wie event in pyhton 
+document = komplette HTML-Seite im Browser
+document. = greift auf Elemente oder Ereignisse der HTML-Seite zu
 
 
