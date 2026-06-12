@@ -5,7 +5,8 @@ let food = { x: 200, y: 200 };
 let score = 0;
 let activePlayer = null;
 
-const hud = document.getElementById("hud");     //speichert hud ab in neuer variable hud
+const messageHud = document.getElementById("messageHud");
+const scoreHud = document.getElementById("scoreHud");       //speichert hud ab in neuer variable hud
 
 const playerNameInput = document.getElementById("playerName");
 const savePlayerButton = document.getElementById("savePlayer");
@@ -52,16 +53,20 @@ savePlayerButton.addEventListener("click", function()
     })
     .then(response => response.json())
     .then(data => {
-        activePlayer = playerName
-        console.log(data); // Debug in Konsole
-        hud.innerText = data.message; // Anzeige im Spiel
+        activePlayer = playerName;
+
+        console.log(data);
+
+        // HUD Nachricht
+        messageHud.innerText = "Spiel gestartet!";
+        setTimeout(() => {
+            messageHud.style.display = "none";
+        }, 1000);
     })
     .catch(error => {
         console.error("Fehler:", error);
     });
-})
-
-
+});
 
 //bewegung
 function moveSnake()
@@ -162,7 +167,7 @@ function resetGame()
 
 function updateHUD()
 {
-    hud.innerText = `Score: ${score}`;                      //${} = setze die variable hier in den text
+    scoreHud.innerText = `Score: ${score}`;                      //${} = setze die variable hier in den text
 }
 
 function gameOver()
