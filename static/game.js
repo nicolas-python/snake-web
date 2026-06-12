@@ -9,6 +9,7 @@ const hud = document.getElementById("hud");     //speichert hud ab in neuer vari
 
 const playerNameInput = document.getElementById("playerName");
 const savePlayerButton = document.getElementById("savePlayer");
+const highscoresDiv = document.getElementById("highscores");
 
 const canvas = document.getElementById("game");         //zugriff auf das canvas-element aus HTML
 const ctx = canvas.getContext("2d");                                //benutze den 2D-Zeichenstift für das Canvas
@@ -189,7 +190,13 @@ function loadHighscores()
     .then(response => response.json())
     .then(data =>
     {
-        console.log(data);
+       highscoresDiv.innerHTML = "<h3>Top 3 Highscores</h3>";
+
+        data.slice(0, 3).forEach((player, index) =>
+        {
+            highscoresDiv.innerHTML +=
+                `<div>${index + 1}. ${player[0]} - ${player[1]}</div>`;
+        });
     });
 }
 
@@ -210,4 +217,7 @@ function gameLoop()
 }
 
 loadHighscores();
+setInterval(loadHighscores, 3000);
+
+
 setInterval(gameLoop, 200);
