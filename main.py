@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from database import init_db, save_score, save_player
+from database import init_db, save_score, save_player, get_highscores
 
 app = Flask(__name__)                           #erstellt die flask-app
 
@@ -28,6 +28,12 @@ def save_score_route():
     save_score(name, score, 0)  # aus deiner alten DB-Funktion
 
     return jsonify({"status": "ok","message": "Score gespeichert!"})
+
+@app.route("/highscores")
+def highscores():
+
+    highscores = get_highscores()
+    return jsonify(highscores)
 
 
 if __name__ == '__main__':                      #entscheidet ob Programm startet

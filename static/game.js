@@ -183,6 +183,16 @@ function gameOver()
     resetGame();
 }
 
+function loadHighscores()
+{
+    fetch("/highscores")
+    .then(response => response.json())
+    .then(data =>
+    {
+        console.log(data);
+    });
+}
+
 //game loop
 function gameLoop()
 {
@@ -199,4 +209,5 @@ function gameLoop()
     updateHUD();
 }
 
+loadHighscores();
 setInterval(gameLoop, 200);
