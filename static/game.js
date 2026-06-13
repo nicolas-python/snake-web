@@ -64,6 +64,9 @@ savePlayerButton.addEventListener("click", function()
         setTimeout(() => {
             messageHud.style.display = "none";
         }, 1000);
+        gameRunning = true;
+        startGameLoop()
+
     })
     .catch(error => {
         console.error("Fehler:", error);
@@ -225,11 +228,23 @@ function loadHighscores()
 }
 
 //game loop
+
+function startGameLoop()
+{
+    if (!gameRunning || !activePlayer)
+    {
+        return;
+    }
+
+    gameLoop();
+
+    setTimeout(startGameLoop, gameSpeed);
+}
+
 function gameLoop()
 {
     if (!gameRunning) return;
 
-    if (!activePlayer) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     moveSnake();
@@ -242,5 +257,4 @@ function gameLoop()
 loadHighscores();
 setInterval(loadHighscores, 3000);
 setInterval(updateTimer, 1000);
-
-setInterval(gameLoop, gameSpeed);
+startGameLoop();
