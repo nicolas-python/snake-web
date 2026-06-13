@@ -3,6 +3,8 @@ console.log("game.js geladen");
 
 let food = { x: 200, y: 200 };
 let score = 0;
+let gameTimer = 0;
+let gameSpeed = 200;
 let activePlayer = null;
 
 const messageHud = document.getElementById("messageHud");
@@ -161,6 +163,8 @@ function resetGame()
     snake = [{ x: 100, y: 100 }];
     direction = "right";
     score = 0;
+    gameTimer = 0;
+    gameSpeed = 200;
     gameRunning = true;
     spawnFood();
 }
@@ -168,6 +172,21 @@ function resetGame()
 function updateHUD()
 {
     scoreHud.innerText = `Score: ${score}`;                      //${} = setze die variable hier in den text
+}
+
+function updateTimer()
+{
+    if (paused) return;
+
+    if (!activePlayer) return;
+
+    gameTimer++;
+
+    if (gameTimer % 10 === 0)
+    {
+        gameSpeed -= 10;
+        console.log("Neue Geschwindigkeit:", gameSpeed);
+    }
 }
 
 function gameOver()
@@ -211,7 +230,6 @@ function gameLoop()
     if (!gameRunning) return;
 
     if (!activePlayer) return;
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     moveSnake();
@@ -223,6 +241,6 @@ function gameLoop()
 
 loadHighscores();
 setInterval(loadHighscores, 3000);
+setInterval(updateTimer, 1000);
 
-
-setInterval(gameLoop, 200);
+setInterval(gameLoop, gameSpeed);
