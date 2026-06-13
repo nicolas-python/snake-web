@@ -174,7 +174,7 @@ function resetGame()
 
 function updateHUD()
 {
-    scoreHud.innerText = `Score: ${score}`;                      //${} = setze die variable hier in den text
+    scoreHud.innerText = `Score: ${score} - Time: ${gameTimer}s`;                    //${} = setze die variable hier in den text
 }
 
 function updateTimer()
