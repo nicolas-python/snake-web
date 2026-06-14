@@ -5,10 +5,13 @@ let food = { x: 200, y: 200 };
 let score = 0;
 let gameTimer = 0;
 let gameSpeed = 200;
+let baseSpeed = 200;
 let activePlayer = null;
 let specialFood = null;
 let specialFoodType = null;
+let activeEffects = {slow: 0, speed: 0};
 let specialFoodCooldown = 15
+let effectHud = document.getElementById("effectHud");
 
 const messageHud = document.getElementById("messageHud");
 const scoreHud = document.getElementById("scoreHud");       //speichert hud ab in neuer variable hud
@@ -106,7 +109,7 @@ function moveSnake()
     }
     else if (specialFoodType === "slow")
     {
-        gameSpeed += 50;
+        activeEffects.slow = 10;
     }
     else if (specialFoodType === "poison")
     {
@@ -114,7 +117,7 @@ function moveSnake()
     }
     else if (specialFoodType === "speed_boost")
     {
-        gameSpeed -= 50;
+        activeEffects.speed = 10;
     }
     else if (specialFoodType === "shrink")
     {
@@ -165,7 +168,7 @@ function moveSnake()
 
 function checkSelfCollision(x, y)
 {
-    for (let i = 1; i < snake.length; i++)
+    for (let i = 1; i < snake.length;i = i + 1)
     {
         if (x === snake[i].x && y === snake[i].y)
         {
@@ -306,7 +309,19 @@ function resetGame()
 
 function updateHUD()
 {
-    scoreHud.innerText = `Score: ${score} - Time: ${gameTimer}s`;                    //${} = setze die variable hier in den text
+    let text = `Score: ${score} - Time: ${gameTimer}s`;       //${} = setze die variable hier in den text
+
+    if (activeEffects.speed > 0)
+    {
+        text += ` | Speed: ${buildCountdown(activeEffects.speed)}`;
+    }
+
+    if (activeEffects.slow > 0)
+    {
+        text += ` | Slow: ${buildCountdown(activeEffects.slow)}`;
+    }
+
+    scoreHud.innerText = text;
 }
 
 function updateTimer()
@@ -315,13 +330,8 @@ function updateTimer()
 
     if (!activePlayer) return;
 
-    gameTimer++;
+    gameTimer = gameTimer + 1;
 
-    if (gameTimer % 10 === 0)
-    {
-        gameSpeed -= 10;
-        console.log("Neue Geschwindigkeit:", gameSpeed);
-    }
     if (specialFoodCooldown > 0)
     {
     console.log("Cooldown Special Food:", specialFoodCooldown);
@@ -331,6 +341,26 @@ function updateTimer()
     {
     spawnSpecialFood();
     }
+    let modifier = 0;
+
+    if (activeEffects.slow > 0)
+    {
+        activeEffects.slow = activeEffects.slow - 1;
+        modifier = modifier + 50;
+    }
+
+    if (activeEffects.speed > 0)
+    {
+        activeEffects.speed = activeEffects.speed - 1;
+        modifier = modifier - 50;
+    }
+
+    gameSpeed = baseSpeed + modifier;
+}
+
+function buildCountdown(value)
+{
+    return value;
 }
 
 function removeSpecialFood()
