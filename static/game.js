@@ -88,6 +88,47 @@ function moveSnake()
     if (direction === "up") head.y -= 20;
     if (direction === "down") head.y += 20;
 
+    if (specialFood &&
+    snake[0].x === specialFood.x &&
+    snake[0].y === specialFood.y)
+{
+    if (specialFoodType === "score")
+    {
+        score += 3;
+    }
+
+    else if (specialFoodType === "grow")
+    {
+        score += 2;
+        let last = snake[snake.length - 1];
+        snake.push({ x: last.x, y: last.y });           //+1
+        snake.push({ x: last.x, y: last.y });           //+2
+    }
+    else if (specialFoodType === "slow")
+    {
+        gameSpeed += 50;
+    }
+    else if (specialFoodType === "poison")
+    {
+        score -= 10;
+    }
+    else if (specialFoodType === "speed_boost")
+    {
+        gameSpeed -= 50;
+    }
+    else if (specialFoodType === "shrink")
+    {
+        if (snake.length > 2)
+        {
+            snake.pop();
+            snake.pop();
+        }
+    }
+
+    specialFood = null;
+    specialFoodType = null;
+    }
+
     //wand kollesion
     if (
         head.x < 0 ||
@@ -108,7 +149,7 @@ function moveSnake()
 
     snake.unshift(head);
 
-        //vorne einfügen und hinten entfernen
+    //vorne einfügen und hinten entfernen
     //food kollision check
     if (snake[0].x === food.x && snake[0].y === food.y)
     {
@@ -219,10 +260,38 @@ function drawSpecialFood()
 {
     if (!specialFood) return;
 
-    ctx.fillStyle = "purple";   //test-farbe
+    // Farbe abhängig vom Typ
+    if (specialFoodType === "score")
+    {
+        ctx.fillStyle = "gold";
+    }
+    else if (specialFoodType === "grow")
+    {
+        ctx.fillStyle = "green";
+    }
+    else if (specialFoodType === "slow")
+    {
+        ctx.fillStyle = "blue";
+    }
+    else if (specialFoodType === "poison")
+    {
+        ctx.fillStyle = "red";
+    }
+    else if (specialFoodType === "speed_boost")
+    {
+        ctx.fillStyle = "orange";
+    }
+    else if (specialFoodType === "shrink")
+    {
+        ctx.fillStyle = "purple";
+    }
+    else
+    {
+        ctx.fillStyle = "white";
+    }
+
     ctx.fillRect(specialFood.x, specialFood.y, 20, 20);
 }
-
 
 function resetGame()
 {
@@ -328,7 +397,6 @@ function gameLoop()
     drawSnake();
     drawFood();
     drawSpecialFood();
-    spawnSpecialFood();
 
     updateHUD();
 }
