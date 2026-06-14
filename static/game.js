@@ -184,7 +184,43 @@ function spawnSpecialFood()
         y: Math.floor(Math.random() * 19) * 20
     };
 
-    specialFoodType = "score";
+    let foodTypeNumber = Math.floor(Math.random() * 6) + 1;
+
+    if (foodTypeNumber === 1)
+    {
+        specialFoodType = "score";
+    }
+    else if (foodTypeNumber === 2)
+    {
+        specialFoodType = "grow";
+    }
+    else if (foodTypeNumber === 3)
+    {
+        specialFoodType = "slow";
+    }
+    else if (foodTypeNumber === 4)
+    {
+        specialFoodType = "poison";
+    }
+    else if (foodTypeNumber === 5)
+    {
+        specialFoodType = "speed_boost";
+    }
+    else if (foodTypeNumber === 6)
+    {
+        specialFoodType = "shrink";
+    }
+    console.log("Special Food Type:", specialFoodType);
+    specialFoodCooldown = 15;
+    setTimeout(removeSpecialFood, 5000);
+}
+
+function drawSpecialFood()
+{
+    if (!specialFood) return;
+
+    ctx.fillStyle = "purple";   //test-farbe
+    ctx.fillRect(specialFood.x, specialFood.y, 20, 20);
 }
 
 
@@ -222,7 +258,16 @@ function updateTimer()
     console.log("Cooldown Special Food:", specialFoodCooldown);
     specialFoodCooldown = specialFoodCooldown - 1;
     }
+    else
+    {
     spawnSpecialFood();
+    }
+}
+
+function removeSpecialFood()
+{
+    specialFood = null;
+    specialFoodType = null;
 }
 
 function gameOver()
@@ -261,7 +306,6 @@ function loadHighscores()
 }
 
 //game loop
-
 function startGameLoop()
 {
     if (!gameRunning || !activePlayer)
@@ -283,6 +327,8 @@ function gameLoop()
     moveSnake();
     drawSnake();
     drawFood();
+    drawSpecialFood();
+    spawnSpecialFood();
 
     updateHUD();
 }
