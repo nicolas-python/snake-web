@@ -6,6 +6,9 @@ let score = 0;
 let gameTimer = 0;
 let gameSpeed = 200;
 let activePlayer = null;
+let specialFood = null;
+let specialFoodType = null;
+let specialFoodCooldown = 15
 
 const messageHud = document.getElementById("messageHud");
 const scoreHud = document.getElementById("scoreHud");       //speichert hud ab in neuer variable hud
@@ -158,7 +161,31 @@ function spawnFood()
     };
 }
 
-let gameRunning = true;
+function spawnSpecialFood()
+{
+    if (specialFood !== null)
+    {
+        return;
+    }
+
+    if (specialFoodCooldown > 0)
+    {
+        return;
+    }
+
+    if (Math.random() > 0.2)
+    {
+        return;
+    }
+
+    specialFood =
+    {
+        x: Math.floor(Math.random() * 19) * 20,
+        y: Math.floor(Math.random() * 19) * 20
+    };
+
+    specialFoodType = "score";
+}
 
 
 function resetGame()
@@ -190,6 +217,12 @@ function updateTimer()
         gameSpeed -= 10;
         console.log("Neue Geschwindigkeit:", gameSpeed);
     }
+    if (specialFoodCooldown > 0)
+    {
+    console.log("Cooldown Special Food:", specialFoodCooldown);
+    specialFoodCooldown = specialFoodCooldown - 1;
+    }
+    spawnSpecialFood();
 }
 
 function gameOver()
