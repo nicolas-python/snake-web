@@ -11,9 +11,11 @@ let specialFood = null;
 let specialFoodType = null;
 let activeEffects = {slow: 0, speed: 0};
 let specialFoodCooldown = 15
+let difficulty = "normal";
+let scoreMultiplier = 1;
+
 let effectHud = document.getElementById("effectHud");
 const specialFoodHud = document.getElementById("messagespecialfood");
-
 const messageHud = document.getElementById("messageHud");
 const scoreHud = document.getElementById("scoreHud");       //speichert hud ab in neuer variable hud
 
@@ -79,6 +81,30 @@ savePlayerButton.addEventListener("click", function()
         console.error("Fehler:", error);
     });
 });
+
+//schwierigkeit
+function applyDifficulty() {
+
+    if (difficulty === "easy") {
+        baseSpeed = 220;
+        scoreMultiplier = 1;
+        specialFoodCooldown = 20;
+    }
+
+    else if (difficulty === "normal") {
+        baseSpeed = 180;
+        scoreMultiplier = 1.5;
+        specialFoodCooldown = 15;
+    }
+
+    else if (difficulty === "hard") {
+        baseSpeed = 140;
+        scoreMultiplier = 2;
+        specialFoodCooldown = 10;
+    }
+
+    gameSpeed = baseSpeed;
+}
 
 //bewegung
 function moveSnake()
@@ -163,7 +189,7 @@ function moveSnake()
     //food kollision check
     if (snake[0].x === food.x && snake[0].y === food.y)
     {
-        score= score +1;
+        score += scoreMultiplier;
         spawnFood();
     }
     else
@@ -303,17 +329,6 @@ function drawSpecialFood()
     ctx.fillRect(specialFood.x, specialFood.y, 20, 20);
 }
 
-function resetGame()
-{
-    snake = [{ x: 100, y: 100 }];
-    direction = "right";
-    score = 0;
-    gameTimer = 0;
-    gameSpeed = 200;
-    gameRunning = true;
-    spawnFood();
-}
-
 function updateHUD()
 {
     let text = `Score: ${score} - Time: ${gameTimer}s`;       //${} = setze die variable hier in den text
@@ -414,6 +429,18 @@ function gameOver()
 
     alert("Game Over");
     resetGame();
+}
+
+function resetGame()
+{
+    snake = [{ x: 100, y: 100 }];
+    direction = "right";
+    score = 0;
+    gameTimer = 0;
+    gameSpeed = baseSpeed;
+    gameRunning = true;
+
+    spawnFood();
 }
 
 function loadHighscores()
