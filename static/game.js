@@ -415,27 +415,28 @@ function updateTimer()
 {
     if (paused) return;
 
-    if (!activePlayer) return;
-
     gameTimer = gameTimer + 1;
 
+    // Special Food Cooldown
     if (specialFoodCooldown > 0)
     {
-    console.log("Cooldown Special Food:", specialFoodCooldown);
-    specialFoodCooldown = specialFoodCooldown - 1;
+        specialFoodCooldown = specialFoodCooldown - 1;
     }
     else
     {
-    spawnSpecialFood();
+        spawnSpecialFood();
     }
+
     let modifier = 0;
 
+    // Slow Effect runterzählen
     if (activeEffects.slow > 0)
     {
         activeEffects.slow = activeEffects.slow - 1;
         modifier = modifier + 50;
     }
 
+    // Speed Effect runterzählen
     if (activeEffects.speed > 0)
     {
         activeEffects.speed = activeEffects.speed - 1;
