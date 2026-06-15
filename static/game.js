@@ -287,12 +287,15 @@ function drawFood()
     ctx.fillRect(food.x, food.y, 20, 20);
 }
 
-function spawnFood()
-{
-    food = {
-        x: Math.floor(Math.random() * 20) * 20,
-        y: Math.floor(Math.random() * 20) * 20
-    };
+function spawnFood() {
+    let x, y;
+
+    do {
+        x = Math.floor(Math.random() * (canvas.width / 20)) * 20;
+        y = Math.floor(Math.random() * (canvas.height / 20)) * 20;
+    } while (!isFree(x, y));
+
+    food = { x, y };
 }
 
 function spawnSpecialFood()
@@ -312,11 +315,16 @@ function spawnSpecialFood()
         return;
     }
 
-    specialFood =
+     let x, y;
+
+    do
     {
-        x: Math.floor(Math.random() * 19) * 20,
-        y: Math.floor(Math.random() * 19) * 20
-    };
+        x = Math.floor(Math.random() * (canvas.width / 20)) * 20;
+        y = Math.floor(Math.random() * (canvas.height / 20)) * 20;
+    }
+    while (!isFree(x, y));
+
+    specialFood = { x, y };
 
     let foodTypeNumber = Math.floor(Math.random() * 6) + 1;
 
@@ -448,6 +456,16 @@ function removeSpecialFood()
     specialFoodType = null;
 }
 
+function isFree(x, y) {
+    //Snake check
+    if (snake.some(s => s.x === x && s.y === y)) return false;      //=> = macht eine Funktion
+
+    //hindernis check
+    if (obstacles.some(o => o.x === x && o.y === y)) return false;
+
+    return true;
+}
+
 function showFloatingMessage(text)
 {
     specialFoodHud.innerText = text;
@@ -534,14 +552,14 @@ function gameLoop() {
 }
 
 function initGame() {
+    if (difficulty === "easy") createNormalObstacles();
+    else if (difficulty === "hard") createHardObstacles();
+    else createNormalObstacles();
+
     snake = [{ x: 160, y: 160 }];
     direction = "right";
     score = 0;
     gameTimer = 0;
-
-    if (difficulty === "easy") createNormalObstacles();
-    else if (difficulty === "hard") createHardObstacles();
-    else createNormalObstacles();
 
     spawnFood();
 }
