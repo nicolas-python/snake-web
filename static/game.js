@@ -490,7 +490,7 @@ function gameOver()
 
 function resetGame()
 {
-    snake = [{ x: 200, y: 200 }];
+    snake = [{ x: 160, y: 160 }];
     direction = "right";
     score = 0;
     gameTimer = 0;
@@ -534,7 +534,7 @@ function gameLoop() {
 }
 
 function initGame() {
-    snake = [{ x: 200, y: 200 }];
+    snake = [{ x: 160, y: 160 }];
     direction = "right";
     score = 0;
     gameTimer = 0;
