@@ -45,5 +45,20 @@ ${score}= setzt Variable in Text einsetzen  (${} wird auch Template Literal / St
 addEventListener=reagiert auf taste wie event in pyhton 
 document = komplette HTML-Seite im Browser
 document. = greift auf Elemente oder Ereignisse der HTML-Seite zu
-
-
+" " = statischer Text (für einfachen Text ohne Variablen,kein Einfügen von Werten möglich)
+` ` = dynamischer Text mit Variablen(erlaubt Variablen mit ${},ideal für dynamische Texte z.b Score, Timer)
+CSS = Cascading Style Sheet = Design (Position, Farbe, Größe, Animation)
+<style> = CSS direkt in der HTML-Datei
+selector = wählt ein HTML-Element aus (#id, .class, tag)
+position = absolute = Element frei auf der Seite platzieren
+top / left = genaue Position eines Elements
+color = Textfarbe
+font-size = Schriftgröße
+font-weight = macht Text fett
+pointer-events: none = Element ist nicht klickbar (Maus geht durch)
+background = Hintergrundfarbe eines Elements
+border = Rahmen um ein Element
+padding = Innenabstand im Element
+z-index = bestimmt, welches Element vorne liegt
+display = none = Element ist unsichtbar
+display = block = Element ist sichtbar
