@@ -106,6 +106,15 @@ function applyDifficulty() {
     gameSpeed = baseSpeed;
 }
 
+function getCurrentSpeed() {
+    let speed = baseSpeed;
+
+    if (activeEffects.slow > 0) speed += 60;
+    if (activeEffects.speed > 0) speed -= 60;
+
+    return Math.max(60, speed);
+}
+
 //bewegung
 function moveSnake()
 {
@@ -472,8 +481,7 @@ function startGameLoop()
     setTimeout(startGameLoop, gameSpeed);
 }
 
-function gameLoop()
-{
+function gameLoop() {
     if (!gameRunning) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -484,8 +492,9 @@ function gameLoop()
     drawSpecialFood();
 
     updateHUD();
-}
 
+    setTimeout(gameLoop, getCurrentSpeed());
+}
 loadHighscores();
 setInterval(loadHighscores, 3000);
 setInterval(updateTimer, 1000);
