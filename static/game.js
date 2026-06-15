@@ -4,7 +4,6 @@ console.log("game.js geladen");
 let food = { x: 200, y: 200 };
 let score = 0;
 let gameTimer = 0;
-let gameSpeed = 200;
 let baseSpeed = 200;
 let activePlayer = null;
 let specialFood = null;
@@ -13,6 +12,8 @@ let activeEffects = {slow: 0, speed: 0};
 let specialFoodCooldown = 15
 let difficulty = "normal";
 let scoreMultiplier = 1;
+let obstacles = [];
+let gameRunning = false;
 
 let effectHud = document.getElementById("effectHud");
 const specialFoodHud = document.getElementById("messagespecialfood");
@@ -74,8 +75,9 @@ savePlayerButton.addEventListener("click", function()
             messageHud.style.display = "none";
         }, 1000);
         gameRunning = true;
-        startGameLoop()
 
+        initGame();
+        gameLoop();
     })
     .catch(error => {
         console.error("Fehler:", error);
@@ -104,6 +106,46 @@ function applyDifficulty() {
     }
 
     gameSpeed = baseSpeed;
+}
+function createNormalObstacles() {
+    obstacles = [
+        { x: 100, y: 80 }, { x: 120, y: 80 },
+        { x: 100, y: 100 }, { x: 120, y: 100 },
+
+        { x: 240, y: 180 }, { x: 260, y: 180 },
+        { x: 240, y: 200 }, { x: 260, y: 200 },
+
+        { x: 120, y: 280 }, { x: 140, y: 280 },
+        { x: 120, y: 300 }, { x: 140, y: 300 }
+    ];
+}
+
+function createHardObstacles() {
+    obstacles = [
+        { x: 80, y: 80 }, { x: 100, y: 80 }, { x: 120, y: 80 },
+        { x: 80, y: 100 }, { x: 100, y: 100 }, { x: 120, y: 100 },
+        { x: 80, y: 120 }, { x: 100, y: 120 }, { x: 120, y: 120 },
+
+        { x: 260, y: 80 }, { x: 280, y: 80 }, { x: 300, y: 80 },
+        { x: 260, y: 100 }, { x: 280, y: 100 }, { x: 300, y: 100 },
+        { x: 260, y: 120 }, { x: 280, y: 120 }, { x: 300, y: 120 },
+
+        { x: 80, y: 260 }, { x: 100, y: 260 }, { x: 120, y: 260 },
+        { x: 80, y: 280 }, { x: 100, y: 280 }, { x: 120, y: 280 },
+        { x: 80, y: 300 }, { x: 100, y: 300 }, { x: 120, y: 300 },
+
+        { x: 260, y: 260 }, { x: 280, y: 260 }, { x: 300, y: 260 },
+        { x: 260, y: 280 }, { x: 280, y: 280 }, { x: 300, y: 280 },
+        { x: 260, y: 300 }, { x: 280, y: 300 }, { x: 300, y: 300 }
+    ];
+}
+
+function drawObstacles() {
+    ctx.fillStyle = "gray";
+
+    for (let o of obstacles) {
+        ctx.fillRect(o.x, o.y, 20, 20);
+    }
 }
 
 function getCurrentSpeed() {
@@ -185,6 +227,13 @@ function moveSnake()
         return;
     }
 
+    //Hinderniss kollision
+    if (obstacles.some(o => o.x === head.x && o.y === head.y))
+    {
+    gameOver();
+    return;
+    }
+
     // selbst kollision
     if (checkSelfCollision(head.x, head.y))
     {
@@ -194,7 +243,6 @@ function moveSnake()
 
     snake.unshift(head);
 
-    //vorne einfügen und hinten entfernen
     //food kollision check
     if (snake[0].x === food.x && snake[0].y === food.y)
     {
@@ -442,7 +490,7 @@ function gameOver()
 
 function resetGame()
 {
-    snake = [{ x: 100, y: 100 }];
+    snake = [{ x: 200, y: 200 }];
     direction = "right";
     score = 0;
     gameTimer = 0;
@@ -469,18 +517,6 @@ function loadHighscores()
 }
 
 //game loop
-function startGameLoop()
-{
-    if (!gameRunning || !activePlayer)
-    {
-        return;
-    }
-
-    gameLoop();
-
-    setTimeout(startGameLoop, gameSpeed);
-}
-
 function gameLoop() {
     if (!gameRunning) return;
 
@@ -490,12 +526,26 @@ function gameLoop() {
     drawSnake();
     drawFood();
     drawSpecialFood();
+    drawObstacles();
 
     updateHUD();
 
     setTimeout(gameLoop, getCurrentSpeed());
 }
+
+function initGame() {
+    snake = [{ x: 200, y: 200 }];
+    direction = "right";
+    score = 0;
+    gameTimer = 0;
+
+    if (difficulty === "easy") createNormalObstacles();
+    else if (difficulty === "hard") createHardObstacles();
+    else createNormalObstacles();
+
+    spawnFood();
+}
+
 loadHighscores();
 setInterval(loadHighscores, 3000);
 setInterval(updateTimer, 1000);
-startGameLoop();
