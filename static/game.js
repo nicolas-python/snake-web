@@ -12,6 +12,7 @@ let specialFoodType = null;
 let activeEffects = {slow: 0, speed: 0};
 let specialFoodCooldown = 15
 let effectHud = document.getElementById("effectHud");
+const specialFoodHud = document.getElementById("messagespecialfood");
 
 const messageHud = document.getElementById("messageHud");
 const scoreHud = document.getElementById("scoreHud");       //speichert hud ab in neuer variable hud
@@ -98,6 +99,7 @@ function moveSnake()
     if (specialFoodType === "score")
     {
         score += 3;
+        showFloatingMessage("+3 Punkte");
     }
 
     else if (specialFoodType === "grow")
@@ -106,23 +108,28 @@ function moveSnake()
         let last = snake[snake.length - 1];
         snake.push({ x: last.x, y: last.y });           //+1
         snake.push({ x: last.x, y: last.y });           //+2
+        showFloatingMessage("Gewachsen");
     }
     else if (specialFoodType === "slow")
     {
         activeEffects.slow = 10;
+        showFloatingMessage("Verlangsamt!");
     }
     else if (specialFoodType === "poison")
     {
         score -= 10;
+        showFloatingMessage("Vergiftet -10 Punkte");
     }
     else if (specialFoodType === "speed_boost")
     {
         activeEffects.speed = 10;
+        showFloatingMessage("SpeedBoost");
     }
     else if (specialFoodType === "shrink")
     {
         if (snake.length > 2)
         {
+            showFloatingMessage("Geschrumpft -2 ");
             snake.pop();
             snake.pop();
         }
@@ -278,19 +285,19 @@ function drawSpecialFood()
     }
     else if (specialFoodType === "poison")
     {
-        ctx.fillStyle = "red";
+        ctx.fillStyle = "violet";
     }
     else if (specialFoodType === "speed_boost")
     {
-        ctx.fillStyle = "orange";
+        ctx.fillStyle = "white";
     }
     else if (specialFoodType === "shrink")
     {
-        ctx.fillStyle = "purple";
+        ctx.fillStyle = "orange";
     }
     else
     {
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "red";
     }
 
     ctx.fillRect(specialFood.x, specialFood.y, 20, 20);
@@ -367,6 +374,27 @@ function removeSpecialFood()
 {
     specialFood = null;
     specialFoodType = null;
+}
+
+function showFloatingMessage(text)
+{
+    specialFoodHud.innerText = text;
+    specialFoodHud.style.color = "gold";
+    specialFoodHud.style.display = "block";
+
+    let position = 200;
+
+    let animation = setInterval(function()
+    {
+        position -= 2;
+        specialFoodHud.style.top = position + "px";
+
+        if (position <= 120)
+        {
+            clearInterval(animation);
+            specialFoodHud.innerText = "";
+        }
+    }, 30);
 }
 
 function gameOver()
