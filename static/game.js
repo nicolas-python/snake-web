@@ -16,6 +16,14 @@ let obstacles = [];
 let gameRunning = false;
 let canMove = true;                                           //verhindert doppel move innerhalb des ticks
 
+const images = {easy_gras: new Image(), easy_gras_2: new Image(), normal_gras: new Image(), hard_lava: new Image(), secret_map: new Image()};
+images.easy_gras.src = "img/easy1.png";
+images.easy_gras_2.src = "img/easy2.png";
+images.normal_gras.src = "img/normal.png";
+images.hard_lava.src = "img/hard.png";
+images.secret_map.src = "img/secret.png";
+
+
 let effectHud = document.getElementById("effectHud");
 const specialFoodHud = document.getElementById("messagespecialfood");
 const messageHud = document.getElementById("messageHud");
