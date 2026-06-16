@@ -14,6 +14,7 @@ let difficulty = "normal";
 let scoreMultiplier = 1;
 let obstacles = [];
 let gameRunning = false;
+let canMove = true;                                           //verhindert doppel move innerhalb des ticks
 
 let effectHud = document.getElementById("effectHud");
 const specialFoodHud = document.getElementById("messagespecialfood");
@@ -560,7 +561,12 @@ function gameLoop() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    if (canMove)
+    {
     moveSnake();
+    canMove = false;
+    }
+
     drawSnake();
     drawFood();
     drawSpecialFood();
@@ -568,7 +574,11 @@ function gameLoop() {
 
     updateHUD();
 
-    setTimeout(gameLoop, getCurrentSpeed());
+    setTimeout(() =>
+    {
+    canMove = true;
+    if (gameRunning) gameLoop();
+    },getCurrentSpeed());
 }
 
 function initGame() {
