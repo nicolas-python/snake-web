@@ -26,6 +26,10 @@ const highscoresDiv = document.getElementById("highscores");
 
 const canvas = document.getElementById("game");         //zugriff auf das canvas-element aus HTML
 const ctx = canvas.getContext("2d");                                //benutze den 2D-Zeichenstift für das Canvas
+const easyBtn = document.getElementById("easyBtn");
+const normalBtn = document.getElementById("normalBtn");
+const hardBtn = document.getElementById("hardBtn");
+
 
 //startpunkt und kopf snake
 let snake = [                               //let = veränderbar
@@ -82,6 +86,21 @@ savePlayerButton.addEventListener("click", function()
     .catch(error => {
         console.error("Fehler:", error);
     });
+});
+
+easyBtn.addEventListener("click", function() {
+    difficulty = "easy";
+    applyDifficulty();
+});
+
+normalBtn.addEventListener("click", function() {
+    difficulty = "normal";
+    applyDifficulty();
+});
+
+hardBtn.addEventListener("click", function() {
+    difficulty = "hard";
+    applyDifficulty();
 });
 
 //schwierigkeit
@@ -553,7 +572,7 @@ function gameLoop() {
 }
 
 function initGame() {
-    if (difficulty === "easy") createNormalObstacles();
+    if (difficulty === "normal") createNormalObstacles();
     else if (difficulty === "hard") createHardObstacles();
     else createNormalObstacles();
 
