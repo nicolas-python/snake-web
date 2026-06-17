@@ -48,6 +48,7 @@ document. = greift auf Elemente oder Ereignisse der HTML-Seite zu
 " " = statischer Text (für einfachen Text ohne Variablen,kein Einfügen von Werten möglich)
 ` ` = dynamischer Text mit Variablen(erlaubt Variablen mit ${},ideal für dynamische Texte z.b Score, Timer)
 => = „mach aus dem links eine Funktion“
+*= dreht den Wert um
 some = prüft jedes element im Array
 CSS = Cascading Style Sheet = Design (Position, Farbe, Größe, Animation)
 <style> = CSS direkt in der HTML-Datei

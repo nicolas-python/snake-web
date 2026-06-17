@@ -14,7 +14,11 @@ let difficulty = "normal";
 let scoreMultiplier = 1;
 let obstacles = [];
 let gameRunning = false;
-let canMove = true;                                           //verhindert doppel move innerhalb des ticks
+let canMove = true;
+let secretMap = false;
+let movingObstaclesEnabled = false;
+let obstacleDirection = 1;
+let obstacleObjects = [];
 
 const images = {easy_gras: new Image(), easy_gras_2: new Image(), normal_gras: new Image(), hard_lava: new Image(), secret_map: new Image()};
 images.easy_gras.src = "/static/snake_img/easy_gras.png";
@@ -185,23 +189,45 @@ function createHardObstacles()
     ];
 }
 
+function moveObstacles()
+{
+    if (!movingObstaclesEnabled) return;
+
+    for (let o of obstacles)
+    {
+        o.x += 2 * obstacleDirection;
+    }
+
+    let bounce = false;
+
+    for (let o of obstacles)
+    {
+        if (o.x >= 380 || o.x <= 0)
+        {
+            bounce = true;
+        }
+    }
+
+    if (bounce)
+    {
+        obstacleDirection *= -1;        //*= dreht den Wert um
+    }
+}
+
 function setObstacles()
 {
     obstacles = [];
 
-    switch (difficulty)
+    if (difficulty === "normal")
     {
-        case "easy":
-            break;
-
-        case "normal":
-            createNormalObstacles();
-            break;
-
-        case "hard":
-            createHardObstacles();
-            break;
+        createNormalObstacles();
     }
+    else if (difficulty === "hard")
+    {
+        createHardObstacles();
+    }
+
+    drawObstacles();
 }
 
 function drawObstacles()
@@ -339,7 +365,11 @@ function checkSelfCollision(x, y)
 
 function drawBackground()
 {
-    if (difficulty === "easy")
+    if (secretMap)
+    {
+        ctx.drawImage(images.secret_map, 0, 0, 400, 400);
+    }
+    else if (difficulty === "easy")
     {
         ctx.drawImage(images.easy_gras, 0, 0, 400, 400);
     }
@@ -627,6 +657,7 @@ function gameLoop() {
     if (canMove)
     {
     moveSnake();
+    moveObstacles();
     canMove = false;
     }
     drawBackground();
@@ -641,6 +672,8 @@ function gameLoop() {
 
 function initGame() {
 
+    secretMap = Math.random() < 1;        //0.1;
+    movingObstaclesEnabled = secretMap;
     setObstacles();
     snake = [{ x: 160, y: 160 }];
     direction = "right";
