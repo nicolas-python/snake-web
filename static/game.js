@@ -17,12 +17,17 @@ let gameRunning = false;
 let canMove = true;                                           //verhindert doppel move innerhalb des ticks
 
 const images = {easy_gras: new Image(), easy_gras_2: new Image(), normal_gras: new Image(), hard_lava: new Image(), secret_map: new Image()};
-images.easy_gras.src = "img/easy1.png";
-images.easy_gras_2.src = "img/easy2.png";
-images.normal_gras.src = "img/normal.png";
-images.hard_lava.src = "img/hard.png";
-images.secret_map.src = "img/secret.png";
+images.easy_gras.src = "/static/snake_img/easy_gras.png";
+images.easy_gras_2.src = "/static/snake_img/easy_gras_2.png";
+images.normal_gras.src = "/static/snake_img/normal_gras.png";
+images.hard_lava.src = "/static/snake_img/hard_lava.png";
+images.secret_map.src = "/static/snake_img/secret_map.png";
 
+images.easy_gras.onerror = () => console.log("easy_gras FEHLER");
+images.easy_gras_2.onerror = () => console.log("easy_gras_2 FEHLER");
+images.normal_gras.onerror = () => console.log("normal_gras FEHLER");
+images.hard_lava.onerror = () => console.log("hard_lava FEHLER");
+images.secret_map.onerror = () => console.log("secret_map FEHLER");
 
 let effectHud = document.getElementById("effectHud");
 const specialFoodHud = document.getElementById("messagespecialfood");
@@ -297,6 +302,22 @@ function checkSelfCollision(x, y)
     return false;
 }
 
+
+function drawBackground()
+{
+    if (difficulty === "easy")
+    {
+        ctx.drawImage(images.easy_gras, 0, 0, 400, 400);
+    }
+    else if (difficulty === "normal")
+    {
+        ctx.drawImage(images.normal_gras, 0, 0, 400, 400);
+    }
+    else
+    {
+        ctx.drawImage(images.hard_lava, 0, 0, 400, 400);
+    }
+}
 
 //snake zeichnung(canvas)
 function drawSnake()
@@ -574,7 +595,7 @@ function gameLoop() {
     moveSnake();
     canMove = false;
     }
-
+    drawBackground();
     drawSnake();
     drawFood();
     drawSpecialFood();
@@ -582,12 +603,7 @@ function gameLoop() {
 
     updateHUD();
 
-    setTimeout(() =>
-    {
-    canMove = true;
-    if (gameRunning) gameLoop();
-    },getCurrentSpeed());
-}
+    setTimeout(() => {canMove = true;if (gameRunning) gameLoop();}, getCurrentSpeed());}
 
 function initGame() {
     if (difficulty === "normal") createNormalObstacles();

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from database import init_db, save_score, save_player, get_highscores
 
-app = Flask(__name__)                           #erstellt die flask-app
+app = Flask(__name__)                        #erstellt die flask-app
 
 @app.route('/')                                 #wenn jemand die Route '/'im Browser aufruft, wird diese Funktion ausgeführt
 def start_page():
