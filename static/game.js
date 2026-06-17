@@ -102,37 +102,47 @@ savePlayerButton.addEventListener("click", function()
     });
 });
 
-easyBtn.addEventListener("click", function() {
+easyBtn.addEventListener("click", function()
+{
     difficulty = "easy";
     applyDifficulty();
+    setObstacles();
 });
 
-normalBtn.addEventListener("click", function() {
+normalBtn.addEventListener("click", function()
+{
     difficulty = "normal";
     applyDifficulty();
+    setObstacles();
 });
 
-hardBtn.addEventListener("click", function() {
+hardBtn.addEventListener("click", function()
+{
     difficulty = "hard";
     applyDifficulty();
+    setObstacles();
 });
 
 //schwierigkeit
-function applyDifficulty() {
+function applyDifficulty()
+{
 
-    if (difficulty === "easy") {
+    if (difficulty === "easy")
+    {
         baseSpeed = 220;
         scoreMultiplier = 1;
         specialFoodCooldown = 20;
     }
 
-    else if (difficulty === "normal") {
+    else if (difficulty === "normal")
+    {
         baseSpeed = 180;
         scoreMultiplier = 1.5;
         specialFoodCooldown = 15;
     }
 
-    else if (difficulty === "hard") {
+    else if (difficulty === "hard")
+    {
         baseSpeed = 140;
         scoreMultiplier = 2;
         specialFoodCooldown = 10;
@@ -140,7 +150,8 @@ function applyDifficulty() {
 
     gameSpeed = baseSpeed;
 }
-function createNormalObstacles() {
+function createNormalObstacles()
+{
     obstacles = [
         { x: 100, y: 80 }, { x: 120, y: 80 },
         { x: 100, y: 100 }, { x: 120, y: 100 },
@@ -153,7 +164,8 @@ function createNormalObstacles() {
     ];
 }
 
-function createHardObstacles() {
+function createHardObstacles()
+{
     obstacles = [
         { x: 80, y: 80 }, { x: 100, y: 80 }, { x: 120, y: 80 },
         { x: 80, y: 100 }, { x: 100, y: 100 }, { x: 120, y: 100 },
@@ -173,15 +185,37 @@ function createHardObstacles() {
     ];
 }
 
-function drawObstacles() {
+function setObstacles()
+{
+    obstacles = [];
+
+    switch (difficulty)
+    {
+        case "easy":
+            break;
+
+        case "normal":
+            createNormalObstacles();
+            break;
+
+        case "hard":
+            createHardObstacles();
+            break;
+    }
+}
+
+function drawObstacles()
+{
     ctx.fillStyle = "gray";
 
-    for (let o of obstacles) {
+    for (let o of obstacles)
+    {
         ctx.fillRect(o.x, o.y, 20, 20);
     }
 }
 
-function getCurrentSpeed() {
+function getCurrentSpeed()
+{
     let speed = baseSpeed;
 
     if (activeEffects.slow > 0) speed += 60;
@@ -606,10 +640,8 @@ function gameLoop() {
     setTimeout(() => {canMove = true;if (gameRunning) gameLoop();}, getCurrentSpeed());}
 
 function initGame() {
-    if (difficulty === "normal") createNormalObstacles();
-    else if (difficulty === "hard") createHardObstacles();
-    else createNormalObstacles();
 
+    setObstacles();
     snake = [{ x: 160, y: 160 }];
     direction = "right";
     score = 0;
