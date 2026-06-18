@@ -195,7 +195,7 @@ function moveObstacles()
 
     for (let o of obstacles)
     {
-        o.x += 2 * obstacleDirection;
+        o.x += 10 * obstacleDirection;
     }
 
     let bounce = false;
