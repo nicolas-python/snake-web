@@ -18,7 +18,6 @@ let canMove = true;
 let secretMap = false;
 let movingObstaclesEnabled = false;
 let obstacleDirection = 1;
-let obstacleObjects = [];
 
 const images = {easy_gras: new Image(), easy_gras_2: new Image(), normal_gras: new Image(), hard_lava: new Image(), secret_map: new Image()};
 images.easy_gras.src = "/static/snake_img/easy_gras.png";
@@ -195,7 +194,7 @@ function moveObstacles()
 
     for (let o of obstacles)
     {
-        o.x += 2 * obstacleDirection;
+        o.x += 20 * obstacleDirection;
     }
 
     let bounce = false;
@@ -649,17 +648,35 @@ function loadHighscores()
 }
 
 //game loop
-function gameLoop() {
+function gameLoop()
+{
     if (!gameRunning) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (canMove)
     {
-    moveSnake();
-    moveObstacles();
-    canMove = false;
+        moveSnake();
+
+        // check nach snake move
+        if (obstacles.some(o => o.x === snake[0].x && o.y === snake[0].y))
+        {
+            gameOver();
+            return;
+        }
+
+        moveObstacles();
+
+        // check nach obstacle move
+        if (obstacles.some(o => o.x === snake[0].x && o.y === snake[0].y))
+        {
+            gameOver();
+            return;
+        }
+
+        canMove = false;
     }
+
     drawBackground();
     drawSnake();
     drawFood();
@@ -668,8 +685,12 @@ function gameLoop() {
 
     updateHUD();
 
-    setTimeout(() => {canMove = true;if (gameRunning) gameLoop();}, getCurrentSpeed());}
-
+    setTimeout(() =>
+    {
+        canMove = true;
+        if (gameRunning) gameLoop();
+    }, getCurrentSpeed());
+}
 function initGame() {
 
     secretMap = Math.random() < 1;        //0.1;
