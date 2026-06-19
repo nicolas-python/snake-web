@@ -397,6 +397,30 @@ function drawBackground()
         ctx.drawImage(images.hard_lava, 0, 0, 400, 400);
     }
 }
+//easy modus grid
+function drawGrid()
+{
+    ctx.strokeStyle = "rgba(0,0,0,0.1)";
+    ctx.lineWidth = 1;
+
+    //vertikale Linien
+    for (let x = 0; x <= canvas.width; x += 20)
+    {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+    }
+
+    //horizontale Linien
+    for (let y = 0; y <= canvas.height; y += 20)
+    {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+    }
+}
 
 //snake zeichnung(canvas)
 function drawSnake()
@@ -672,7 +696,6 @@ function gameLoop() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (canMove)
     {
         moveSnake();
         moveObstacles();
@@ -686,6 +709,9 @@ function gameLoop() {
     }
 
     drawBackground();
+    if (difficulty === "easy") {drawGrid();
+    }
+
     drawSnake();
     drawFood();
     drawSpecialFood();
