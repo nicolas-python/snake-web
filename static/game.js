@@ -190,26 +190,36 @@ function createHardObstacles()
 
 function moveObstacles()
 {
-    if (!movingObstaclesEnabled) return;
+    if (!movingObstaclesEnabled)
+    {
+        return;
+    }
 
+    if (!gameRunning)
+    {
+        return;
+    }
+
+    // bewegen
     for (let o of obstacles)
     {
         o.x += 20 * obstacleDirection;
     }
 
-    let bounce = false;
-
+    // prüfen ob irgendein Hindernis den Rand erreicht
     for (let o of obstacles)
     {
-        if (o.x >= 380 || o.x <= 0)
+        if (o.x + 20 >= canvas.width)
         {
-            bounce = true;
+            obstacleDirection = -1;
+            break;
         }
-    }
 
-    if (bounce)
-    {
-        obstacleDirection *= -1;        //*= dreht den Wert um
+        if (o.x <= 0)
+        {
+            obstacleDirection = 1;
+            break;
+        }
     }
 }
 
@@ -569,12 +579,15 @@ function removeSpecialFood()
     specialFoodType = null;
 }
 
-function isFree(x, y) {
-    //Snake check
-    if (snake.some(s => s.x === x && s.y === y)) return false;      //=> = macht eine Funktion
+function isFree(x, y)
+{
+    // Snake check
+    if (snake.some(s => s.x === x && s.y === y))
+        return false;
 
-    //hindernis check
-    if (obstacles.some(o => o.x === x && o.y === y)) return false;
+    // Hindernis check
+    if (obstacles.some(o => o.x === x && o.y === y))
+        return false;
 
     return true;
 }
@@ -648,8 +661,7 @@ function loadHighscores()
 }
 
 //game loop
-function gameLoop()
-{
+function gameLoop() {
     if (!gameRunning) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -657,23 +669,13 @@ function gameLoop()
     if (canMove)
     {
         moveSnake();
-
-        // check nach snake move
-        if (obstacles.some(o => o.x === snake[0].x && o.y === snake[0].y))
-        {
-            gameOver();
-            return;
-        }
-
         moveObstacles();
 
-        // check nach obstacle move
         if (obstacles.some(o => o.x === snake[0].x && o.y === snake[0].y))
         {
             gameOver();
             return;
         }
-
         canMove = false;
     }
 
@@ -686,22 +688,36 @@ function gameLoop()
     updateHUD();
 
     setTimeout(() =>
-    {
-        canMove = true;
-        if (gameRunning) gameLoop();
+    {canMove = true;
+        if (gameRunning)
+        {
+            gameLoop();
+        }
     }, getCurrentSpeed());
 }
-function initGame() {
 
-    secretMap = Math.random() < 1;        //0.1;
-    movingObstaclesEnabled = secretMap;
+function initGame()
+{
+    secretMap = Math.random() < 1;    //0.1;
+
+    movingObstaclesEnabled = false;
+
     setObstacles();
+
     snake = [{ x: 160, y: 160 }];
     direction = "right";
     score = 0;
     gameTimer = 0;
 
     spawnFood();
+
+    if (secretMap)
+    {
+        setTimeout(() =>
+        {
+            movingObstaclesEnabled = true;
+        }, 5000);
+    }
 }
 
 loadHighscores();
