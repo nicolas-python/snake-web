@@ -698,7 +698,7 @@ function gameLoop() {
 
 function initGame()
 {
-    secretMap = Math.random() < 1;    //0.1;
+    secretMap = Math.random() < 0.1;
 
     movingObstaclesEnabled = false;
 
