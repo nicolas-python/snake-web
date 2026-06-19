@@ -18,6 +18,7 @@ let canMove = true;
 let secretMap = false;
 let movingObstaclesEnabled = false;
 let obstacleDirection = 1;
+let currentEasyBackground = null;
 
 const images = {easy_gras: new Image(), easy_gras_2: new Image(), normal_gras: new Image(), hard_lava: new Image(), secret_map: new Image()};
 images.easy_gras.src = "/static/snake_img/easy_gras.png";
@@ -379,9 +380,14 @@ function drawBackground()
         ctx.drawImage(images.secret_map, 0, 0, 400, 400);
     }
     else if (difficulty === "easy")
+  {
+    if (!currentEasyBackground)
     {
-        ctx.drawImage(images.easy_gras, 0, 0, 400, 400);
+        currentEasyBackground = images.easy_gras;
     }
+
+    ctx.drawImage(currentEasyBackground, 0, 0, 400, 400);
+  }
     else if (difficulty === "normal")
     {
         ctx.drawImage(images.normal_gras, 0, 0, 400, 400);
@@ -641,7 +647,7 @@ function resetGame()
     gameSpeed = baseSpeed;
     gameRunning = true;
 
-    spawnFood();
+    initGame();
 }
 
 function loadHighscores()
@@ -702,6 +708,12 @@ function initGame()
 
     movingObstaclesEnabled = false;
 
+    if (difficulty === "easy")
+    {
+    currentEasyBackground = Math.random() < 0.5
+        ? images.easy_gras
+        : images.easy_gras_2;
+    }
     setObstacles();
 
     snake = [{ x: 160, y: 160 }];
