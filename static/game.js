@@ -19,8 +19,9 @@ let secretMap = false;
 let movingObstaclesEnabled = false;
 let obstacleDirection = 1;
 let currentEasyBackground = null;
-const snakeColors = ["darkgreen", "blue", "red", "purple", "orange", "yellow", "cyan", "pink"];
+const snakeColors = ["red", "green", "yellow", "blue", "white", "orange", "purple", "brown", "pink", "gold", "silver", "gray", "purple"];
 let colorOffset = 0;
+let bodyColor = "darkgreen";
 
 const images = {easy_gras: new Image(), easy_gras_2: new Image(), normal_gras: new Image(), hard_lava: new Image(), secret_map: new Image()};
 images.easy_gras.src = "/static/snake_img/easy_gras.png";
@@ -289,7 +290,7 @@ function moveSnake()
         if (direction === "down") head.y += 20;
 
         // neues Kopfteil hinzufügen
-        snake.unshift({ x: head.x, y: head.y, color: "green" })          //unshift= füge etwas ganz vorne ins Array ein
+        snake.unshift({ x: head.x, y: head.y, color: "green" });          //unshift= füge etwas ganz vorne ins Array ein
 
         //food kollision check
         if (snake[0].x === food.x && snake[0].y === food.y)
@@ -297,12 +298,7 @@ function moveSnake()
         score += scoreMultiplier;
         spawnFood();
 
-        colorOffset = colorOffset + 1;
-
-        if (colorOffset >= snakeColors.length)
-        {
-            colorOffset = 0;
-        }
+        bodyColor = snakeColors[Math.floor(Math.random() * snakeColors.length)];
       }
         else
         {
@@ -358,11 +354,7 @@ function moveSnake()
         }
 
         //wand kollesion
-        if (
-            head.x < 0 ||
-            head.y < 0 ||
-            head.x >= canvas.width ||
-            head.y >= canvas.height)
+        if (head.x < 0 || head.y < 0 || head.x >= canvas.width || head.y >= canvas.height)
         {
             gameOver();
             return;
@@ -457,14 +449,7 @@ function drawSnake()
         }
         else
         {
-            let index = i + colorOffset;
-
-            if (index >= snakeColors.length)
-            {
-                index = index - snakeColors.length;
-            }
-
-            ctx.fillStyle = snakeColors[index];
+            ctx.fillStyle = bodyColor;
         }
 
         ctx.fillRect(snake[i].x, snake[i].y, 20, 20);
