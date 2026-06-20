@@ -98,6 +98,10 @@ savePlayerButton.addEventListener("click", function()
         }, 1000);
         gameRunning = true;
 
+        easyBtn.disabled = true;
+        normalBtn.disabled = true;
+        hardBtn.disabled = true;
+
         initGame();
         gameLoop();
     })
@@ -649,6 +653,9 @@ function showFloatingMessage(text)
 function gameOver()
 {
     gameRunning = false;
+    easyBtn.disabled = false;
+    normalBtn.disabled = false;
+    hardBtn.disabled = false;
 
     fetch("/save_score", {                      //fetch = sendet Daten an Server
         method: "POST",                                   //post = Daten werden gesendet
