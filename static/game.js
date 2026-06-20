@@ -661,13 +661,12 @@ function showFloatingMessage(text)
 function gameOver()
 {
     gameRunning = false;
-    easyBtn.disabled = false;
-    normalBtn.disabled = false;
-    hardBtn.disabled = false;
 
-    fetch("/save_score", {                      //fetch = sendet Daten an Server
+    fetch("/save_score",                //fetch = sendet Daten an Server
+    {
         method: "POST",                                   //post = Daten werden gesendet
-        headers: {
+        headers:
+        {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({                      // JSON= JS → JSON Format
@@ -675,9 +674,25 @@ function gameOver()
             score: score
         })
     });
+    setTimeout(() =>
+   {
+    let playAgain = confirm("Nochmal spielen?\n\nOK = Weiter spielen\nAbbrechen = Schwierigkeit ändern");
 
-    alert("Game Over");
-    resetGame();
+    if (playAgain)
+    {
+        resetGame();
+        easyBtn.disabled = true;
+        normalBtn.disabled = true;
+        hardBtn.disabled = true;
+        gameLoop();
+    }
+    else
+    {
+        easyBtn.disabled = false;
+        normalBtn.disabled = false;
+        hardBtn.disabled = false;
+    }
+   }, 100);
 }
 
 function resetGame()
