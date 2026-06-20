@@ -108,6 +108,7 @@ savePlayerButton.addEventListener("click", function()
 
 easyBtn.addEventListener("click", function()
 {
+    if (gameRunning) return;
     difficulty = "easy";
     applyDifficulty();
     setObstacles();
@@ -115,6 +116,7 @@ easyBtn.addEventListener("click", function()
 
 normalBtn.addEventListener("click", function()
 {
+    if (gameRunning) return;
     difficulty = "normal";
     applyDifficulty();
     setObstacles();
@@ -122,6 +124,7 @@ normalBtn.addEventListener("click", function()
 
 hardBtn.addEventListener("click", function()
 {
+    if (gameRunning) return;
     difficulty = "hard";
     applyDifficulty();
     setObstacles();

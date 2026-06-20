@@ -11,7 +11,7 @@ HTML	<!-- Kommentar -->
 
 
 ## JavaScript 
-ctx = Zeichenwerkzeug (2D Kontext)
+ctx = Zeichenwerkzeug (2D Kontext) (Canvas Drawing Context)
 Rechtecke zeichnen: ctx.fillRect(x, y, breite, höhe)
 Farben setzen: ctx.fillStyle = "green
 
@@ -65,3 +65,8 @@ padding = Innenabstand im Element
 z-index = bestimmt, welches Element vorne liegt
 display = none = Element ist unsichtbar
 display = block = Element ist sichtbar
+
+was fehlt 
+Schwierigkeit während Spiel sperren
+Body-Farben andert sich beim essen von Normalem essen
+Game-Over-Regenbogenanimation
