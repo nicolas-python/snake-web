@@ -10,7 +10,7 @@ let specialFood = null;
 let specialFoodType = null;
 let activeEffects = {slow: 0, speed: 0};
 let specialFoodCooldown = 15
-let difficulty = "normal";
+let difficulty = null;
 let scoreMultiplier = 1;
 let obstacles = [];
 let gameRunning = false;
@@ -74,9 +74,15 @@ document.addEventListener("keydown", function(event)
 // Spieler speichern
 savePlayerButton.addEventListener("click", function()
 {
+    if (difficulty === null)
+    {
+        alert("Bitte zuerst eine Schwierigkeit auswählen.");
+        return;
+    }
     const playerName = playerNameInput.value;
 
-    fetch("/create_player", {
+    fetch("/create_player",
+        {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -93,7 +99,8 @@ savePlayerButton.addEventListener("click", function()
 
         // HUD Nachricht
         messageHud.innerText = "Spiel gestartet!";
-        setTimeout(() => {
+        setTimeout(() =>
+        {
             messageHud.style.display = "none";
         }, 1000);
         gameRunning = true;
@@ -105,7 +112,8 @@ savePlayerButton.addEventListener("click", function()
         initGame();
         gameLoop();
     })
-    .catch(error => {
+    .catch(error =>
+    {
         console.error("Fehler:", error);
     });
 });
