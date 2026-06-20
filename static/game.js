@@ -19,6 +19,8 @@ let secretMap = false;
 let movingObstaclesEnabled = false;
 let obstacleDirection = 1;
 let currentEasyBackground = null;
+const snakeColors = ["darkgreen", "blue", "red", "purple", "orange", "yellow", "cyan", "pink"];
+let colorOffset = 0;
 
 const images = {easy_gras: new Image(), easy_gras_2: new Image(), normal_gras: new Image(), hard_lava: new Image(), secret_map: new Image()};
 images.easy_gras.src = "/static/snake_img/easy_gras.png";
@@ -50,9 +52,8 @@ const hardBtn = document.getElementById("hardBtn");
 
 
 //startpunkt und kopf snake
-let snake = [                               //let = veränderbar
-  { x: 100, y: 100 }
-];
+let snake =[                             //let = veränderbar
+    { x: 160, y: 160, color: "green" }];
 
 //steuerung
 let direction = "right";
@@ -277,102 +278,110 @@ function getCurrentSpeed()
 
 //bewegung
 function moveSnake()
-{
-    if (paused) return;
-
-    let head = { x: snake[0].x, y: snake[0].y };
-
-    if (direction === "right") head.x += 20;
-    if (direction === "left") head.x-= 20;
-    if (direction === "up") head.y -= 20;
-    if (direction === "down") head.y += 20;
-
-    if (specialFood &&
-    snake[0].x === specialFood.x &&
-    snake[0].y === specialFood.y)
-{
-    if (specialFoodType === "score")
     {
-        score += 3;
-        showFloatingMessage("+3 Punkte");
-    }
+        if (paused) return;
 
-    else if (specialFoodType === "grow")
-    {
-        score += 2;
-        let last = snake[snake.length - 1];
-        snake.push({ x: last.x, y: last.y });           //+1
-        snake.push({ x: last.x, y: last.y });           //+2
-        showFloatingMessage("Gewachsen");
-    }
-    else if (specialFoodType === "slow")
-    {
-        activeEffects.slow = 10;
-        showFloatingMessage("Verlangsamt!");
-    }
-    else if (specialFoodType === "poison")
-    {
-        score -= 10;
-        showFloatingMessage("Vergiftet -10 Punkte");
-    }
-    else if (specialFoodType === "speed_boost")
-    {
-        activeEffects.speed = 10;
-        showFloatingMessage("SpeedBoost");
-    }
-    else if (specialFoodType === "shrink")
-    {
-        if (snake.length > 2)
-        {
-            showFloatingMessage("Geschrumpft -2 ");
-            snake.pop();
-            snake.pop();
-        }
-    }
+        let head = { x: snake[0].x, y: snake[0].y };
 
-    specialFood = null;
-    specialFoodType = null;
-    }
+        if (direction === "right") head.x += 20;
+        if (direction === "left") head.x-= 20;
+        if (direction === "up") head.y -= 20;
+        if (direction === "down") head.y += 20;
 
-    //wand kollesion
-    if (
-        head.x < 0 ||
-        head.y < 0 ||
-        head.x >= canvas.width ||
-        head.y >= canvas.height)
-    {
-        gameOver();
-        return;
-    }
+        // neues Kopfteil hinzufügen
+        snake.unshift({ x: head.x, y: head.y, color: "green" })          //unshift= füge etwas ganz vorne ins Array ein
 
-    //Hinderniss kollision
-    if (obstacles.some(o => o.x === head.x && o.y === head.y))
-    {
-    gameOver();
-    return;
-    }
-
-    // selbst kollision
-    if (checkSelfCollision(head.x, head.y))
-    {
-        gameOver();
-        return;
-    }
-
-    snake.unshift(head);
-
-    //food kollision check
-    if (snake[0].x === food.x && snake[0].y === food.y)
-    {
+        //food kollision check
+        if (snake[0].x === food.x && snake[0].y === food.y)
+      {
         score += scoreMultiplier;
         spawnFood();
-    }
-    else
-    {
-        snake.pop();
-    }
-}
 
+        colorOffset = colorOffset + 1;
+
+        if (colorOffset >= snakeColors.length)
+        {
+            colorOffset = 0;
+        }
+      }
+        else
+        {
+            snake.pop();
+        }
+
+        //special food check
+        if (specialFood &&
+        snake[0].x === specialFood.x &&
+        snake[0].y === specialFood.y)
+    {
+        if (specialFoodType === "score")
+        {
+            score += 3;
+            showFloatingMessage("+3 Punkte");
+        }
+
+        else if (specialFoodType === "grow")
+        {
+            score += 2;
+            let last = snake[snake.length - 1];
+            snake.push({ x: last.x, y: last.y });           //+1
+            snake.push({ x: last.x, y: last.y });           //+2
+            showFloatingMessage("Gewachsen");
+        }
+        else if (specialFoodType === "slow")
+        {
+            activeEffects.slow = 10;
+            showFloatingMessage("Verlangsamt!");
+        }
+        else if (specialFoodType === "poison")
+        {
+            score -= 10;
+            showFloatingMessage("Vergiftet -10 Punkte");
+        }
+        else if (specialFoodType === "speed_boost")
+        {
+            activeEffects.speed = 10;
+            showFloatingMessage("SpeedBoost");
+        }
+        else if (specialFoodType === "shrink")
+        {
+            if (snake.length > 2)
+            {
+                showFloatingMessage("Geschrumpft -2 ");
+                snake.pop();
+                snake.pop();
+            }
+        }
+
+        specialFood = null;
+        specialFoodType = null;
+        }
+
+        //wand kollesion
+        if (
+            head.x < 0 ||
+            head.y < 0 ||
+            head.x >= canvas.width ||
+            head.y >= canvas.height)
+        {
+            gameOver();
+            return;
+        }
+
+        //Hinderniss kollision
+        if (obstacles.some(o => o.x === head.x && o.y === head.y))
+        {
+        gameOver();
+        return;
+        }
+
+        // selbst kollision
+        if (checkSelfCollision(head.x, head.y))
+        {
+            gameOver();
+            return;
+        }
+    }
 
 function checkSelfCollision(x, y)
 {
@@ -440,11 +449,25 @@ function drawGrid()
 //snake zeichnung(canvas)
 function drawSnake()
 {
-    ctx.fillStyle = "green";
-
-    for (let part of snake)
+    for (let i = 0; i < snake.length; i++)
     {
-        ctx.fillRect(part.x, part.y, 20, 20);
+        if (i === 0)
+        {
+            ctx.fillStyle = "green"; // Kopf bleibt fix
+        }
+        else
+        {
+            let index = i + colorOffset;
+
+            if (index >= snakeColors.length)
+            {
+                index = index - snakeColors.length;
+            }
+
+            ctx.fillStyle = snakeColors[index];
+        }
+
+        ctx.fillRect(snake[i].x, snake[i].y, 20, 20);
     }
 }
 

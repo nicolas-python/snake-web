@@ -36,6 +36,7 @@ JSON = Ein Datenformat   ( Standardformat für Daten zwischen JS und Python)
 JSON.stringify() = wandelt JS Objekt → JSON Text
 request.get_json() = holt die daten die JS geschickt hat 
 console.log() = print im Browser (JavaScript)
+unshift = füge etwas ganz vorne ins Array ein
 
 ## HTML
 div =einfach ein Container im HTML
