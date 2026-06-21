@@ -22,6 +22,8 @@ let currentEasyBackground = null;
 const snakeColors = ["red", "green", "yellow", "blue", "white", "orange", "purple", "brown", "pink", "gold", "silver", "gray", "purple"];
 let colorOffset = 0;
 let bodyColor = "darkgreen";
+let gameOverAnimation = null;
+let gameOverColorIndex = 0;
 
 const images = {easy_gras: new Image(), easy_gras_2: new Image(), normal_gras: new Image(), hard_lava: new Image(), secret_map: new Image()};
 images.easy_gras.src = "/static/snake_img/easy_gras.png";
@@ -50,6 +52,25 @@ const ctx = canvas.getContext("2d");                                //benutze de
 const easyBtn = document.getElementById("easyBtn");
 const normalBtn = document.getElementById("normalBtn");
 const hardBtn = document.getElementById("hardBtn");
+
+document.getElementById("restartBtn").onclick = () =>
+{
+    clearInterval(gameOverAnimation);
+    document.getElementById("gameOverBox").style.display = "none";
+
+    resetGame();
+    gameLoop();
+};
+
+document.getElementById("menuBtn").onclick = () =>
+{
+    clearInterval(gameOverAnimation);
+    document.getElementById("gameOverBox").style.display = "none";
+
+    easyBtn.disabled = false;
+    normalBtn.disabled = false;
+    hardBtn.disabled = false;
+}
 
 
 //startpunkt und kopf snake
@@ -668,7 +689,22 @@ function showFloatingMessage(text)
 
 function gameOver()
 {
+    if (!gameRunning) return; // verhindert doppeltes Triggern
+
     gameRunning = false;
+
+    clearInterval(gameOverAnimation);
+
+    gameOverColorIndex = 0;
+
+    messageHud.innerText = "GAME OVER";
+    messageHud.style.display = "block";
+
+    gameOverAnimation = setInterval(() =>
+    {
+        messageHud.style.color = snakeColors[gameOverColorIndex];
+        gameOverColorIndex = (gameOverColorIndex + 1) % snakeColors.length;
+    }, 300);
 
     fetch("/save_score",                //fetch = sendet Daten an Server
     {
@@ -703,6 +739,8 @@ function gameOver()
    }, 100);
 }
 
+
+
 function resetGame()
 {
     snake = [{ x: 160, y: 160 }];
@@ -711,6 +749,7 @@ function resetGame()
     gameTimer = 0;
     gameSpeed = baseSpeed;
     gameRunning = true;
+    messageHud.style.display = "none";                  //gameOver text wird ausgeblendet bei nexter runde
 
     initGame();
 }
