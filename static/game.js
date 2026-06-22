@@ -300,36 +300,57 @@ function getCurrentSpeed()
 
 //bewegung
 function moveSnake()
+{
+    if (paused) return;
+
+    let head = { x: snake[0].x, y: snake[0].y };
+
+    if (direction === "right") head.x += 20;
+    if (direction === "left") head.x -= 20;
+    if (direction === "up") head.y -= 20;
+    if (direction === "down") head.y += 20;
+
+    // wand kollesion
+    if (head.x < 0 || head.y < 0 || head.x >= canvas.width || head.y >= canvas.height)
     {
-        if (paused) return;
+        gameOver();
+        return;
+    }
 
-        let head = { x: snake[0].x, y: snake[0].y };
+    // Hinderniss kollision
+    if (obstacles.some(o => o.x === head.x && o.y === head.y))
+    {
+        gameOver();
+        return;
+    }
 
-        if (direction === "right") head.x += 20;
-        if (direction === "left") head.x-= 20;
-        if (direction === "up") head.y -= 20;
-        if (direction === "down") head.y += 20;
+    // selbst kollision
+    if (checkSelfCollision(head.x, head.y))
+    {
+        gameOver();
+        return;
+    }
 
-        // neues Kopfteil hinzufügen
-        snake.unshift({ x: head.x, y: head.y, color: "green" });          //unshift= füge etwas ganz vorne ins Array ein
+    // neues Kopfteil hinzufügen
+    snake.unshift({ x: head.x, y: head.y, color: "green" });          //unshift= füge etwas ganz vorne ins Array ein
 
-        //food kollision check
-        if (snake[0].x === food.x && snake[0].y === food.y)
-      {
+    //food kollision check
+    if (snake[0].x === food.x && snake[0].y === food.y)
+    {
         score += scoreMultiplier;
         spawnFood();
 
         bodyColor = snakeColors[Math.floor(Math.random() * snakeColors.length)];
-      }
-        else
-        {
-            snake.pop();
-        }
+    }
+    else
+    {
+        snake.pop();
+    }
 
-        //special food check
-        if (specialFood &&
-        snake[0].x === specialFood.x &&
-        snake[0].y === specialFood.y)
+    //special food check
+    if (specialFood &&
+    snake[0].x === specialFood.x &&
+    snake[0].y === specialFood.y)
     {
         if (specialFoodType === "score")
         {
@@ -372,29 +393,8 @@ function moveSnake()
 
         specialFood = null;
         specialFoodType = null;
-        }
-
-        //wand kollesion
-        if (head.x < 0 || head.y < 0 || head.x >= canvas.width || head.y >= canvas.height)
-        {
-            gameOver();
-            return;
-        }
-
-        //Hinderniss kollision
-        if (obstacles.some(o => o.x === head.x && o.y === head.y))
-        {
-        gameOver();
-        return;
-        }
-
-        // selbst kollision
-        if (checkSelfCollision(head.x, head.y))
-        {
-            gameOver();
-            return;
-        }
     }
+}
 
 function checkSelfCollision(x, y)
 {
