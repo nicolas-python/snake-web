@@ -1,6 +1,4 @@
 //Snake Game Logik (Browser)
-console.log("game.js geladen");
-
 let food = { x: 200, y: 200 };
 let score = 0;
 let gameTimer = 0;
@@ -31,12 +29,6 @@ images.easy_gras_2.src = "/static/snake_img/easy_gras_2.png";
 images.normal_gras.src = "/static/snake_img/normal_gras.png";
 images.hard_lava.src = "/static/snake_img/hard_lava.png";
 images.secret_map.src = "/static/snake_img/secret_map.png";
-
-images.easy_gras.onerror = () => console.log("easy_gras FEHLER");
-images.easy_gras_2.onerror = () => console.log("easy_gras_2 FEHLER");
-images.normal_gras.onerror = () => console.log("normal_gras FEHLER");
-images.hard_lava.onerror = () => console.log("hard_lava FEHLER");
-images.secret_map.onerror = () => console.log("secret_map FEHLER");
 
 let effectHud = document.getElementById("effectHud");
 const specialFoodHud = document.getElementById("messagespecialfood");
@@ -117,8 +109,6 @@ savePlayerButton.addEventListener("click", function()
     .then(response => response.json())
     .then(data => {
         activePlayer = playerName;
-
-        console.log(data);
 
         // HUD Nachricht
         messageHud.innerText = "Spiel gestartet!";
@@ -548,7 +538,6 @@ function spawnSpecialFood()
     {
         specialFoodType = "shrink";
     }
-    console.log("Special Food Type:", specialFoodType);
     specialFoodCooldown = 15;
     setTimeout(removeSpecialFood, 5000);
 }
