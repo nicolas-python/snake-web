@@ -7,7 +7,7 @@ F12 drücken für Konsole in Browser
 ## Komentare schreiben
 Python	# Kommentar
 JavaScript	// Kommentar
-HTML	<!-- Kommentar -->
+HTML	<!-- Kommentar --> oder /* Kommentar */
 
 
 ## JavaScript 
@@ -71,3 +71,5 @@ was fehlt
 Schwierigkeit während Spiel sperren
 Body-Farben andert sich beim essen von Normalem essen
 Game-Over-Regenbogenanimation
+font-size = Größe der Schrift
+font-weight = Dicke (wie fett sie ist)

@@ -817,3 +817,4 @@ function initGame()
 loadHighscores();
 setInterval(loadHighscores, 3000);
 setInterval(updateTimer, 1000);
+setInterval(() => console.log(getCurrentSpeed()), 1000);
