@@ -697,15 +697,24 @@ function gameOver()
 
     gameOverColorIndex = 0;
 
-    messageHud.innerText = "GAME OVER";
-    messageHud.style.display = "block";
+    const messageHud = document.getElementById("messageHud");
+    const gameOverBox = document.getElementById("gameOverBox");
+    const gameOverText = document.getElementById("gameOverText");
 
+    //HUD ausblenden
+    messageHud.style.display = "none";
+
+    // großes Game Over anzeigen
+    gameOverBox.style.display = "block";
+
+   // Farb-Blink Animation
     gameOverAnimation = setInterval(() =>
     {
-        messageHud.style.color = snakeColors[gameOverColorIndex];
+        gameOverText.style.color = snakeColors[gameOverColorIndex];
         gameOverColorIndex = (gameOverColorIndex + 1) % snakeColors.length;
     }, 300);
 
+    //score save
     fetch("/save_score",                //fetch = sendet Daten an Server
     {
         method: "POST",                                   //post = Daten werden gesendet
@@ -718,28 +727,7 @@ function gameOver()
             score: score
         })
     });
-    setTimeout(() =>
-   {
-    let playAgain = confirm("Nochmal spielen?\n\nOK = Weiter spielen\nAbbrechen = Schwierigkeit ändern");
-
-    if (playAgain)
-    {
-        resetGame();
-        easyBtn.disabled = true;
-        normalBtn.disabled = true;
-        hardBtn.disabled = true;
-        gameLoop();
-    }
-    else
-    {
-        easyBtn.disabled = false;
-        normalBtn.disabled = false;
-        hardBtn.disabled = false;
-    }
-   }, 100);
 }
-
-
 
 function resetGame()
 {
@@ -771,26 +759,23 @@ function loadHighscores()
 }
 
 //game loop
-function gameLoop() {
+function gameLoop()
+{
     if (!gameRunning) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    {
-        moveSnake();
-        moveObstacles();
+    moveSnake();
+    moveObstacles();
 
-        if (obstacles.some(o => o.x === snake[0].x && o.y === snake[0].y))
-        {
-            gameOver();
-            return;
-        }
-        canMove = false;
+    if (obstacles.some(o => o.x === snake[0].x && o.y === snake[0].y))
+    {
+        gameOver();
+        return;
     }
 
     drawBackground();
-    if (difficulty === "easy") {drawGrid();
-    }
+    if (difficulty === "easy") drawGrid();
 
     drawSnake();
     drawFood();
@@ -800,7 +785,9 @@ function gameLoop() {
     updateHUD();
 
     setTimeout(() =>
-    {canMove = true;
+    {
+        canMove = true;
+
         if (gameRunning)
         {
             gameLoop();

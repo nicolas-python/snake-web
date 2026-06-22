@@ -39,11 +39,10 @@
 
     <!-- gameOver text -->
     <div id="gameOverBox" style="display:none;">
-    <p id="messageHud">GAME OVER</p>
+    <p id="gameOverText">GAME OVER</p>
     <button id="restartBtn">Weiter spielen</button>
     <button id="menuBtn">Schwierigkeit ändern</button>
     </div>
-
     <script src="/static/game.js"></script>         <!-- lade das script game.js aus dem static ordner und fuhrt es aus -->
 
 </body>                                     <!-- makiert das ende des sichbaren bereiches -->
@@ -60,4 +59,30 @@
     font-weight: bold;
     pointer-events: none;
 }
+
+#gameOverBox
+{
+    position: absolute;
+    top: 100px;                      /* weiter runter = größerer Wert */
+    left: 50%;                       /*mittig*/
+    transform: translateX(-50%);
+
+    width: 300px;
+
+    display: none;
+
+    text-align: center;
+
+    background: rgba(0,0,0,0);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+#gameOverText
+{
+    font-size: 40px;                /* größe */
+    font-weight: 600;               /* dicke */
+    text-align: center;
+}
+
 </style>
