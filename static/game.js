@@ -161,21 +161,21 @@ function applyDifficulty()
 
     if (difficulty === "easy")
     {
-        baseSpeed = 220;
+        baseSpeed = 160;
         scoreMultiplier = 1;
         specialFoodCooldown = 20;
     }
 
     else if (difficulty === "normal")
     {
-        baseSpeed = 180;
+        baseSpeed = 125;
         scoreMultiplier = 1.5;
         specialFoodCooldown = 15;
     }
 
     else if (difficulty === "hard")
     {
-        baseSpeed = 140;
+        baseSpeed = 100;
         scoreMultiplier = 2;
         specialFoodCooldown = 10;
     }
@@ -611,6 +611,21 @@ function updateTimer()
     {
         spawnSpecialFood();
     }
+    //speed steigerung
+     if (gameTimer > 0 && gameTimer % 10 === 0)
+    {
+
+        if (difficulty === "easy")
+            baseSpeed -= 5;
+
+        else if (difficulty === "normal")
+            baseSpeed -= 10;
+
+        else if (difficulty === "hard")
+            baseSpeed -= 15;
+
+        baseSpeed = Math.max(60, baseSpeed);
+    }
 
     let modifier = 0;
 
@@ -630,13 +645,6 @@ function updateTimer()
 
     gameSpeed = baseSpeed + modifier;
 
-    if (gameTimer > 0 && gameTimer % 10 === 0)
-    {
-    baseSpeed = Math.max(60, baseSpeed - 10);
-
-    console.log("10 Sekunden erreicht!");
-    console.log("Neue baseSpeed:", baseSpeed);
-    }
 }
 
 function buildCountdown(value)
