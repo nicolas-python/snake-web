@@ -629,6 +629,14 @@ function updateTimer()
     }
 
     gameSpeed = baseSpeed + modifier;
+
+    if (gameTimer > 0 && gameTimer % 10 === 0)
+    {
+    baseSpeed = Math.max(60, baseSpeed - 10);
+
+    console.log("10 Sekunden erreicht!");
+    console.log("Neue baseSpeed:", baseSpeed);
+    }
 }
 
 function buildCountdown(value)
@@ -720,6 +728,8 @@ function gameOver()
 
 function resetGame()
 {
+    applyDifficulty();
+
     snake = [{ x: 160, y: 160 }];
     direction = "right";
     score = 0;
@@ -817,4 +827,3 @@ function initGame()
 loadHighscores();
 setInterval(loadHighscores, 3000);
 setInterval(updateTimer, 1000);
-setInterval(() => console.log(getCurrentSpeed()), 1000);
