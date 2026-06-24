@@ -77,5 +77,10 @@ def get_highscores():
         ORDER BY score DESC
         LIMIT 3
     """)
+    highscores = cursor.fetchall()
 
-    return cursor.fetchall()
+    print("DB HIGHSCORES:", highscores)
+
+    conn.close()
+
+    return highscores
