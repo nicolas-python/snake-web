@@ -754,17 +754,20 @@ function loadHighscores()
     fetch("/highscores")
     .then(response => response.json())
     .then(data =>
+    data.forEach((player, index) =>
     {
-        console.log("HIGHscores RAW:", data);
-        console.log("Active Player:", activePlayer);
-       highscoresDiv.innerHTML = "<h3>Top 3 Highscores</h3>";
-
+        data.forEach((player, index) =>         //prüfen Kommen vom Server wirklich verschiedene Datensätze?
+                                                      // Ist der Fehler in JavaScript?
+                                                      // Oder werden die Daten schon falsch vom Backend geliefert?
+        {
+            console.log(index, player);     //index = Position im Arra //player = die kompletten Daten dieses Eintrags
+        });
         data.slice(0, 3).forEach((player, index) =>
         {
             highscoresDiv.innerHTML +=
                 `<div>${index + 1}. ${player[0]} - ${player[1]}</div>`;
         });
-    });
+    }));
 }
 
 //game loop
