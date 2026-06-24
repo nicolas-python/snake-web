@@ -22,6 +22,7 @@ let colorOffset = 0;
 let bodyColor = "darkgreen";
 let gameOverAnimation = null;
 let gameOverColorIndex = 0;
+let highscoreInterval = null;
 
 const images = {easy_gras: new Image(), easy_gras_2: new Image(), normal_gras: new Image(), hard_lava: new Image(), secret_map: new Image()};
 images.easy_gras.src = "/static/snake_img/easy_gras.png";
@@ -749,26 +750,28 @@ function resetGame()
     initGame();
 }
 
-function loadHighscores()
-{
+function loadHighscores() {
     fetch("/highscores")
-    .then(response => response.json())
-    .then(data =>
-    data.forEach((player, index) =>
-    {
-        data.forEach((player, index) =>         //prüfen Kommen vom Server wirklich verschiedene Datensätze?
-                                                      // Ist der Fehler in JavaScript?
-                                                      // Oder werden die Daten schon falsch vom Backend geliefert?
-        {
-            console.log(index, player);     //index = Position im Arra //player = die kompletten Daten dieses Eintrags
+        .then(res => res.json())
+        .then(data => {
+
+            console.log("HIGHscores RAW:", data);
+
+            highscoresDiv.innerHTML = "<h3>Top 3 Highscores</h3>";
+
+            data.slice(0, 3).forEach((player, index) => {
+                highscoresDiv.innerHTML +=
+                    `<div>${index + 1}. ${player[0]} - ${player[1]}</div>`;
+            });
         });
-        data.slice(0, 3).forEach((player, index) =>
-        {
-            highscoresDiv.innerHTML +=
-                `<div>${index + 1}. ${player[0]} - ${player[1]}</div>`;
-        });
-    }));
 }
+
+function startHighscoreUpdates()                //gezieltes aktualliesieren da sonst fehler
+    {
+    //sodass es nur einmal ausgeführt wird, anstatt mehrere Schleifen zu starten/verhindert mehrere parallele Intervalle
+    if (highscoreInterval) return;
+    highscoreInterval = setInterval(loadHighscores, 3000);
+    }
 
 //game loop
 function gameLoop()
@@ -838,5 +841,5 @@ function initGame()
 }
 
 loadHighscores();
-setInterval(loadHighscores, 3000);
+startHighscoreUpdates();
 setInterval(updateTimer, 1000);

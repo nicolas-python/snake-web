@@ -7,11 +7,11 @@ def init_db():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS players (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
+        name TEXT NOT NULL UNIQUE,
         score INTEGER DEFAULT 0,
         time INTEGER DEFAULT 0
     )
-    """)
+                   """)
 
     conn.commit()
     conn.close()
@@ -32,7 +32,7 @@ def save_player(name):
     cursor = conn.cursor()
 
     cursor.execute(
-        "INSERT INTO players (name, score) VALUES (?, ?)",
+        "INSERT OR IGNORE INTO players (name, score) VALUES (?, ?)",
         (name, 0)
     )
 
