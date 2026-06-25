@@ -73,3 +73,18 @@ Body-Farben andert sich beim essen von Normalem essen
 Game-Over-Regenbogenanimation
 font-size = Größe der Schrift
 font-weight = Dicke (wie fett sie ist)
+
+
+## datenbank leeren
+def reset_db_once():
+    conn = sqlite3.connect("snake.db")
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM players")
+
+    conn.commit()
+    conn.close()
+
+    print("DB einmalig geleert")
+
+reset_db_once()
