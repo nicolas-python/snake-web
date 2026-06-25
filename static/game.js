@@ -696,7 +696,6 @@ function showFloatingMessage(text)
 function gameOver()
 {
     if (!gameRunning) return; // verhindert doppeltes Triggern
-
     gameRunning = false;
 
     clearInterval(gameOverAnimation);
@@ -782,12 +781,6 @@ function gameLoop()
 
     moveSnake();
     moveObstacles();
-
-    if (obstacles.some(o => o.x === snake[0].x && o.y === snake[0].y))
-    {
-        gameOver();
-        return;
-    }
 
     drawBackground();
     if (difficulty === "easy") drawGrid();
