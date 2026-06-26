@@ -754,8 +754,6 @@ function loadHighscores() {
         .then(res => res.json())
         .then(data => {
 
-            console.log("HIGHscores RAW:", data);
-
             highscoresDiv.innerHTML = "<h3>Top 3 Highscores</h3>";
 
             data.slice(0, 3).forEach((player, index) => {

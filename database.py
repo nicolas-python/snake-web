@@ -99,8 +99,6 @@ def get_highscores():
 
     highscores = cursor.fetchall()
 
-    print("DB HIGHSCORES:", highscores)
-
     conn.close()
     return highscores
 
