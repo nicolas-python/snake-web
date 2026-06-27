@@ -67,7 +67,32 @@ z-index = bestimmt, welches Element vorne liegt
 display = none = Element ist unsichtbar
 display = block = Element ist sichtbar
 
-
+## CSS
+CSS = (Cascading Style Sheets) bestimmt das Aussehen und das Layout einer Webseite
+background-color = Hintergrundfarbe eines Elements.
+color = Textfarbe eines Elements.
+font-size = Größe der Schrift.
+font-weight = Dicke der Schrift (normal, fett usw.).
+width = Breite eines Elements.
+display = Bestimmt, wie sich ein Element auf der Webseite verhält.
+display: block = Element beginnt in einer neuen Zeile und kann zentriert werden.
+margin = Außenabstand eines Elements.
+margin: 0 auto = Zentriert ein Block-Element horizontal.
+padding = Innenabstand zwischen Inhalt und Rand.
+border = Rand um ein Element.
+border-radius = Macht die Ecken eines Elements rund.
+text-align = Richtet Text aus (links, mittig, rechts).
+position = Bestimmt, wie ein Element auf der Seite positioniert wird.
+position: absolute = Element kann frei auf der Seite platziert werden.
+top = Abstand vom oberen Rand.
+left= Abstand vom linken Rand.
+right = Abstand vom rechten Rand.
+bottom = Abstand vom unteren Rand.
+transform = Verschiebt, dreht oder skaliert ein Element.
+translateX(-50%) = Verschiebt ein Element auf der X-Achse nach links.
+pointer-events: none = Element reagiert nicht auf Mausereignisse.
+px (Pixel) = Maßeinheit für Größen und Abstände.
+#id = Wählt ein HTML-Element über seine id aus.
 
 
 ## datenbank leeren
