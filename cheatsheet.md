@@ -67,12 +67,7 @@ z-index = bestimmt, welches Element vorne liegt
 display = none = Element ist unsichtbar
 display = block = Element ist sichtbar
 
-was fehlt 
-Schwierigkeit während Spiel sperren
-Body-Farben andert sich beim essen von Normalem essen
-Game-Over-Regenbogenanimation
-font-size = Größe der Schrift
-font-weight = Dicke (wie fett sie ist)
+
 
 
 ## datenbank leeren
