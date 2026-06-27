@@ -93,7 +93,8 @@ translateX(-50%) = Verschiebt ein Element auf der X-Achse nach links.
 pointer-events: none = Element reagiert nicht auf Mausereignisse.
 px (Pixel) = Maßeinheit für Größen und Abstände.
 #id = Wählt ein HTML-Element über seine id aus.
-
+flex = Elemente werden nebeneinander gesetzt
+pointer-events = „Reagiert dieses Element auf Klicks oder nicht?“
 
 ## datenbank leeren
 def reset_db_once():

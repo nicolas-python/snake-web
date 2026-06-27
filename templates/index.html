@@ -12,6 +12,49 @@
         text-align: center;
         }
 
+        #layout
+        {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 40px;
+        margin-top: 50px;
+
+        transform: translateX(-90px);
+        }
+
+        #gameContainer
+        {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        }
+
+        #effectHud
+        {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        }
+
+       #messagespecialfood
+       {
+        position: absolute;
+        left: 55%;
+        top: 45%;
+        pointer-events: none;
+        }
+
+        #menu
+        {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        }
+
         #game
         {
         display: block;                      /* macht das Canvas zu einem Block-Element */
@@ -22,8 +65,8 @@
         #highscores
         {
         position: absolute;                 /*absolute; = Element frei an einer festen Position platzieren*/
-        left: 70%;
-        top: 150px;
+        right: 250px;
+        top: 120px;
         }
 
         #gameOverBox
@@ -47,51 +90,57 @@
 
         #gameOverText
         {
-            font-size: 40px;                /* größe */
-            font-weight: 600;               /* dicke */
-            text-align: center;
+        font-size: 40px;                /* größe */
+        font-weight: 600;               /* dicke */
+        text-align: center;
         }
     </style>
 </head>
 
 <body>                                  <!-- zeigt an was ich sehen kan auf der website -->
-
+    <!-- Titel -->
     <h1>Welcome to Snake</h1>           <!-- h1 Überschrift ebene 1 -->
     <div id="messageHud">Bitte Spieler auswählen</div>
 
+<div id="layout">
+
+    <!-- Menü -->
+    <div id="menu">
+
+        <input id="playerName" placeholder="Name">
+
+        <button id="easyBtn">Easy</button>
+        <button id="normalBtn">Normal</button>
+        <button id="hardBtn">Hard</button>
+
+        <button id="savePlayer">Spiel Starten</button>
+
+    </div>
+
     <!-- Spielfeld -->
-    <canvas id="game" width="400" height="400"></canvas>
+    <div id="gameContainer">
+        <canvas id="game" width="400" height="400"></canvas>
+        <div id="messagespecialfood"></div>
+        <div id="scoreHud">Score: 0</div>
+        <div id="effectHud"></div>
+        </div>
 
-    <div id="messagespecialfood"></div>
+    </div>
 
-    <!-- Spieler Erstellen -->
-    <input id="playerName" placeholder="Name">
-    <button id="savePlayer">Spiel Starten</button>
-
-    <!-- Schwirigkeitsgrad -->
-    <button id="easyBtn">Easy</button>
-    <button id="normalBtn">Normal</button>
-    <button id="hardBtn">Hard</button>
-
-    <!-- score label erstellen -->
-    <div id="scoreHud">Score: 0</div>                              <!-- div = container -->
-
-    <!-- Timer -->
-    <div id="effectHud"></div>
-
-    <!-- highscore label erstellen -->
+     <!-- Highscore -->
     <div id="highscores">
         <h3>Top 3 Highscores</h3>
     </div>
 
-    <!-- gameOver text -->
+    <!-- Game Over -->
     <div id="gameOverBox">
         <p id="gameOverText">GAME OVER</p>
         <button id="restartBtn">Weiter spielen</button>
         <button id="menuBtn">Schwierigkeit ändern</button>
     </div>
 
-    <script src="/static/game.js"></script>         <!-- lade das script game.js aus dem static ordner und fuhrt es aus -->
+    <!-- Script -->
+    <script src="/static/game.js"></script>
 
 </body>                                     <!-- makiert das ende des sichbaren bereiches -->
 </html>                                     <!-- beended die seite -->
