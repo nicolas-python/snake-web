@@ -7,6 +7,21 @@
     <title>Snake Game</title>
 
     <style>
+
+        html, body               /*greift auf die ganze Website zu*/
+        {
+        margin: 0;               /*entfernt standart abstand vom browser*/
+        min-height: 100vh;        /*vh = viewport height (Bildschirmhöhe)*/
+        }
+
+        body
+        {
+        background-image: url("/static/snake_img/menu_web.png");
+        background-size: cover;             /*Bild wird so vergrößert, dass es den kompletten Bildschirm füllt*/
+        background-repeat: no-repeat;
+        background-position: center;
+        }
+
         h1                          /*titel*/
         {
         text-align: center;
