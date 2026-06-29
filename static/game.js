@@ -90,6 +90,11 @@ document.addEventListener("keydown", function(event)
 // Spieler speichern
 savePlayerButton.addEventListener("click", function()
 {
+     if (gameRunning)
+    {
+        return;
+    }
+
     if (difficulty === null)
     {
         alert("Bitte zuerst eine Schwierigkeit auswählen.");
