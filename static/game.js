@@ -808,6 +808,9 @@ function gameLoop()
 
 function initGame()
 {
+    clearInterval(gameOverAnimation);
+    document.getElementById("gameOverBox").style.display = "none";
+
     secretMap = Math.random() < 0.1;
 
     movingObstaclesEnabled = false;
