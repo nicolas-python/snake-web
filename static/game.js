@@ -37,7 +37,7 @@ const messageHud = document.getElementById("messageHud");
 const scoreHud = document.getElementById("scoreHud");       //speichert hud ab in neuer variable hud
 
 const playerNameInput = document.getElementById("playerName");
-const savePlayerButton = document.getElementById("savePlayer");
+const startGameButton = document.getElementById("startGame");
 const highscoresDiv = document.getElementById("highscores");
 
 const canvas = document.getElementById("game");         //zugriff auf das canvas-element aus HTML
@@ -88,7 +88,7 @@ document.addEventListener("keydown", function(event)
 
 
 // Spieler speichern
-savePlayerButton.addEventListener("click", function()
+startGameButton.addEventListener("click", function()
 {
      if (gameRunning)
     {
