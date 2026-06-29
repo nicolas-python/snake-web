@@ -87,7 +87,7 @@ document.addEventListener("keydown", function(event)
 });
 
 
-// Spieler speichern
+//Spiel starten
 startGameButton.addEventListener("click", function()
 {
      if (gameRunning)
@@ -100,6 +100,7 @@ startGameButton.addEventListener("click", function()
         alert("Bitte zuerst eine Schwierigkeit auswählen.");
         return;
     }
+    startGameButton.disabled = true;
     const playerName = playerNameInput.value;
 
     fetch("/create_player",
@@ -737,6 +738,7 @@ function gameOver()
             score: score
         })
     });
+    startGameButton.disabled = true;
 }
 
 function resetGame()
@@ -750,6 +752,7 @@ function resetGame()
     gameSpeed = baseSpeed;
     gameRunning = true;
     messageHud.style.display = "none";                  //gameOver text wird ausgeblendet bei nexter runde
+    startGameButton.disabled = false;
 
     initGame();
 }
