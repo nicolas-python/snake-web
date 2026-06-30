@@ -86,8 +86,7 @@ document.addEventListener("keydown", function(event)
     if (event.key === "p")
     {
     paused = !paused;
-    document.getElementById("pauseOverlay").style.display =
-    paused ? "flex" : "none";
+    document.getElementById("pauseOverlay").style.display = paused ? "flex" : "none";
     }
 });
 
