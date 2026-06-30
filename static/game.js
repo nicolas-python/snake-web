@@ -83,7 +83,12 @@ document.addEventListener("keydown", function(event)
     if (event.key === "ArrowUp") direction = "up";
     if (event.key === "ArrowDown") direction = "down";
 
-    if (event.key === "p") paused = !paused;
+    if (event.key === "p")
+    {
+    paused = !paused;
+    document.getElementById("pauseOverlay").style.display =
+    paused ? "flex" : "none";
+    }
 });
 
 
