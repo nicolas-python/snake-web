@@ -22,7 +22,7 @@ def create_player():
 def save_score_route():
     data = request.get_json()
 
-    save_score(data["name"], data["score"])
+    save_score(data["name"], data["score"],time = data["time"])
 
     return "OK"
 

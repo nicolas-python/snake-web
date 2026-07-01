@@ -58,7 +58,7 @@ def get_scores():
     conn.close()
     return scores
 
-def save_score(name, score):
+def save_score(name, score, time):
     conn = sqlite3.connect("snake.db")
     cursor = conn.cursor()
 
@@ -69,8 +69,8 @@ def save_score(name, score):
     if result is None:
         # Spieler neu → einfügen
         cursor.execute(
-            "INSERT INTO players (name, score, time) VALUES (?, ?, 0)",
-            (name, score)
+            "INSERT INTO players (name, score, time) VALUES (?, ?, ?)",
+            (name, score, time)
         )
     else:
         best_score = result[0]
@@ -78,8 +78,8 @@ def save_score(name, score):
         # nur updaten wenn besser
         if score > best_score:
             cursor.execute(
-                "UPDATE players SET score = ? WHERE name = ?",
-                (score, name)
+                "UPDATE players SET score = ?, time = ? WHERE name = ?",
+                (score, time, name)
             )
 
     conn.commit()
@@ -89,16 +89,17 @@ def get_highscores():
     conn = sqlite3.connect("snake.db")
     cursor = conn.cursor()
 
-    cursor.execute("""
-        SELECT name, MAX(score) as score, MAX(time)
-        FROM players
-        GROUP BY name
-        ORDER BY score DESC
-        LIMIT 3
-    """)
+    (cursor.execute
+     ("""
+     SELECT name, score, time
+     FROM players
+     ORDER BY score DESC
+     LIMIT 3
+"""))
 
     highscores = cursor.fetchall()
 
     conn.close()
     return highscores
+
 

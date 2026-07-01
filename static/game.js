@@ -739,7 +739,8 @@ function gameOver()
         },
         body: JSON.stringify({                      // JSON= JS → JSON Format
             name: activePlayer,
-            score: score
+            score: score,
+            time: gameTimer
         })
     });
     startGameButton.disabled = true;
@@ -770,7 +771,7 @@ function loadHighscores() {
 
             data.slice(0, 3).forEach((player, index) => {
                 highscoresDiv.innerHTML +=
-                    `<div>${index + 1}. ${player[0]} - ${player[1]}</div>`;
+                    `<div>${index + 1}. ${player[0]} - ${player[1]} - ${player[2]}s</div>`;
             });
         });
 }
