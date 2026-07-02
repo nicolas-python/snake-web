@@ -758,7 +758,7 @@ function resetGame()
     gameSpeed = baseSpeed;
     gameRunning = true;
     messageHud.style.display = "none";                  //gameOver text wird ausgeblendet bei nexter runde
-    startGameButton.disabled = false;
+    startGameButton.disabled = true;
 
     initGame();
 }
