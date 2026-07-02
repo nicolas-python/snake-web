@@ -63,6 +63,7 @@ document.getElementById("menuBtn").onclick = () =>
     easyBtn.disabled = false;
     normalBtn.disabled = false;
     hardBtn.disabled = false;
+    startGameButton.disabled = false;
 }
 
 
