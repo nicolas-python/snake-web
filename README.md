@@ -1,2 +1,59 @@
-# snake-web
-Flask-Backend für ein Python-Snake-Spiel.
+## Snake Game
+Ein erweitertes Snake-Spiel für den Browser mit Spieler-System, Datenbank, Special-Food und verschiedenen Maps. Der Spieler steuert eine Schlange, die durch das Essen von Objekten wächst. Ziel ist es, möglichst viele Punkte zu sammeln, ohne mit sich selbst, Hindernissen oder dem Spielfeldrand zu kollidieren.
+
+## Funktionen
+
+### Spieler-System
+- Spieler erstellen und speichern
+- Highscores speichern
+- Top-3-Highscores anzeigen
+- 
+### Timer anzeigen
+- Score und Zeit
+- Score anzeigen
+
+### Gameplay
+- Spielfeld mit HTML5 Canvas
+- Steuerung der Schlange mit Pfeiltasten
+- Grundlegende Bewegung der Schlange
+- Pausieren des Spiels
+- Geschwindigkeit steigt im Laufe des Spiels
+- Die Snake ändert beim Essen ihre Farbe
+
+### Schwierigkeitsstufen
+  ### Easy
+    - Langsamere Startgeschwindigkeit
+    - Keine Hindernisse
+    - Niedriger Punkte-Multiplikator
+    - Rasterfeld 
+  ### Normal
+    - Mittlere Geschwindigkeit
+    - Zusätzliche Hindernisse
+    - Erhöhter Punkte-Multiplikator
+  ### Hard
+    - Höhere Startgeschwindigkeit
+    - Mehr Hindernisse
+    - Höchster Punkte-Multiplikator
+### Maps und Events
+- Unterschiedliche Hintergründe je nach Schwierigkeit
+- Zufälliges Secret-Map-Event
+- Bewegliche Hindernisse in der Secret Map
+
+### Special Food System
+Verschiedene Spezial-Foods mit zufälligem Spawn und Cooldown:
+- 🟡 Punkte-Food – Gibt zusätzlich +3 Punkte.
+- 🟢 Wachstums-Food – Die Schlange wächst um 2 Blöcke.
+- 🔵 Verlangsamungs-Food – Verlangsamt die Schlange für 10 Sekunden.
+- 🟣 Gift-Food – Zieht 10 Punkte vom Score ab.
+- ⚪ Speed-Boost-Food – Erhöht die Geschwindigkeit für 10 Sekunden.
+- 🟠 Shrink-Food – Verkleinert die Schlange um 2 Blöcke.
+
+## Technologien
+
+## Voraussetzungen
+
+## Installation
+
+## Steuerung
+
+## Spielziel
