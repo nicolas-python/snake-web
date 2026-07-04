@@ -23,6 +23,7 @@ let bodyColor = "darkgreen";
 let gameOverAnimation = null;
 let gameOverColorIndex = 0;
 let highscoreInterval = null;
+let obstacleMoveCounter = 0;
 
 const images = {easy_gras: new Image(), easy_gras_2: new Image(), normal_gras: new Image(), hard_lava: new Image(), secret_map: new Image()};
 images.easy_gras.src = "/static/snake_img/easy_gras.png";
@@ -240,6 +241,14 @@ function moveObstacles()
     {
         return;
     }
+
+    //geschwindigkeit der bewegenden hindernisse steuern
+    obstacleMoveCounter = obstacleMoveCounter + 1;
+
+    if (obstacleMoveCounter < 3) return;        //je größer, desto langsamer
+
+    obstacleMoveCounter = 0;
+
 
     // bewegen
     for (let o of obstacles)
@@ -844,7 +853,7 @@ function initGame()
         setTimeout(() =>
         {
             movingObstaclesEnabled = true;
-        }, 2000);
+        }, 1000);
     }
 }
 
