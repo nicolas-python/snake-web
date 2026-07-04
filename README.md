@@ -25,7 +25,7 @@ Ein erweitertes Snake-Spiel für den Browser mit Spieler-System, Datenbank, Spec
     - Langsamere Startgeschwindigkeit
     - Keine Hindernisse
     - Niedriger Punkte-Multiplikator
-    - Rasterfeld 
+    - Rasterfeld
   ### Normal
     - Mittlere Geschwindigkeit
     - Zusätzliche Hindernisse
@@ -40,7 +40,12 @@ Ein erweitertes Snake-Spiel für den Browser mit Spieler-System, Datenbank, Spec
 - Bewegliche Hindernisse in der Secret Map
 
 ### Special Food System
-Verschiedene Spezial-Foods mit zufälligem Spawn und Cooldown:
+Verschiedene Spezial-Foods mit zufälligem Spawn. Der Spawn-Cooldown hängt von der gewählten Schwierigkeit ab:
+
+- Easy: 20 Sekunden
+- Normal: 15 Sekunden
+- Hard: 10 Sekunden
+
 - 🟡 Punkte-Food – Gibt zusätzlich +3 Punkte.
 - 🟢 Wachstums-Food – Die Schlange wächst um 2 Blöcke.
 - 🔵 Verlangsamungs-Food – Verlangsamt die Schlange für 10 Sekunden.
