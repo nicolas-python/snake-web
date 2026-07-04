@@ -844,7 +844,7 @@ function initGame()
         setTimeout(() =>
         {
             movingObstaclesEnabled = true;
-        }, 5000);
+        }, 2000);
     }
 }
 
