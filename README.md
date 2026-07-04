@@ -7,7 +7,7 @@ Ein erweitertes Snake-Spiel für den Browser mit Spieler-System, Datenbank, Spec
 - Spieler erstellen und speichern
 - Highscores speichern
 - Top-3-Highscores anzeigen
-- 
+  
 ### Timer anzeigen
 - Score und Zeit
 - Score anzeigen
@@ -49,11 +49,35 @@ Verschiedene Spezial-Foods mit zufälligem Spawn und Cooldown:
 - 🟠 Shrink-Food – Verkleinert die Schlange um 2 Blöcke.
 
 ## Technologien
+- JavaScript (Spiel-Logik)
+- HTML5 Canvas (Rendering)
+- CSS (Benutzeroberfläche)
+- Python (Server-Logik)
+- Flask (Web-Framework)
+- SQLite (Datenbank für Spieler und Highscores)
 
 ## Voraussetzungen
+- Python 3.13+
+- Abhängigkeiten aus requirements.txt
 
 ## Installation
+1. Projekt herunterladen oder klonen
+2. Abhängigkeiten installieren:
+   - pip install -r requirements.txt
+     
+3. Spiel starten:
+   - python main.py
+
+4. Anschließend im Browser öffnen:
+
+http://127.0.0.1:5000
 
 ## Steuerung
-
+- Pfeiltaste ↑ – Nach oben bewegen
+- Pfeiltaste ↓ – Nach unten bewegen
+- Pfeiltaste ← – Nach links bewegen
+- Pfeiltaste → – Nach rechts bewegen
+- P – Spiel pausieren, erneut drücken zum Fortsetzen
+  
 ## Spielziel
+Sammle möglichst viele Punkte, überlebe so lange wie möglich und erreiche einen Platz in den Top 3 der Highscoreliste.
