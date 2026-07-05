@@ -36,6 +36,7 @@ Ein erweitertes Snake-Spiel für den Browser mit Spieler-System, Datenbank, Spec
     - Höchster Punkte-Multiplikator
 ### Maps und Events
 - Unterschiedliche Hintergründe je nach Schwierigkeit
+- Unterschiedliche Hindernis-Texturen je nach Map / Schwierigkeit
 - Zufälliges Secret-Map-Event
 - Bewegliche Hindernisse in der Secret Map
 
