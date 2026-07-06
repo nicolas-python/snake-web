@@ -25,7 +25,7 @@ let gameOverColorIndex = 0;
 let highscoreInterval = null;
 let obstacleMoveCounter = 0;
 
-const images = {easy_gras: new Image(), easy_gras_2: new Image(), normal_gras: new Image(), hard_lava: new Image(), secret_map: new Image(), normal_obstacle_optic: new Image(), hard_obstacle_optic: new Image()};
+const images = {easy_gras: new Image(), easy_gras_2: new Image(), normal_gras: new Image(), hard_lava: new Image(), secret_map: new Image(), normal_obstacle_optic: new Image(), hard_obstacle_optic: new Image(), secret_obstacle_optic: new Image()};
 
 images.easy_gras.src = "/static/snake_img/easy_gras.png";
 images.easy_gras_2.src = "/static/snake_img/easy_gras_2.png";
@@ -34,6 +34,7 @@ images.normal_obstacle_optic.src = "/static/snake_img/hindernis_normal.png";
 images.hard_lava.src = "/static/snake_img/hard_lava.png";
 images.hard_obstacle_optic.src = "/static/snake_img/hindernis_schwer.png";
 images.secret_map.src = "/static/snake_img/secret_map.png";
+images.secret_obstacle_optic.src = "/static/snake_img/hindernis_secret.png";
 
 let effectHud = document.getElementById("effectHud");
 const specialFoodHud = document.getElementById("messagespecialfood");
@@ -294,11 +295,14 @@ function setObstacles()
 
 function drawObstacles()
 {
-    ctx.fillStyle = "gray";
-
     for (let o of obstacles)
+    {
+        if (secretMap)
+        {
+            ctx.drawImage(images.secret_obstacle_optic, o.x, o.y, 20, 20);
+        }
 
-    if (difficulty === "normal")
+        else if (difficulty === "normal")
         {
             ctx.drawImage(images.normal_obstacle_optic, o.x, o.y, 20, 20);
         }
@@ -307,12 +311,12 @@ function drawObstacles()
         {
             ctx.drawImage(images.hard_obstacle_optic, o.x, o.y, 20, 20);
         }
-
-         else
+        else
         {
             ctx.fillStyle = "gray";
             ctx.fillRect(o.x, o.y, 20, 20);
         }
+    }
 }
 
 function getCurrentSpeed()
