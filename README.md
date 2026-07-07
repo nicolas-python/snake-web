@@ -1,6 +1,6 @@
 ## Snake Game
 Ein erweitertes Snake-Spiel für den Browser mit Spieler-System, Datenbank, Special-Food und verschiedenen Maps. Der Spieler steuert eine Schlange, die durch das Essen von Objekten wächst. Ziel ist es, möglichst viele Punkte zu sammeln, ohne mit sich selbst, Hindernissen oder dem Spielfeldrand zu kollidieren.
-![Startmenü](static/screenshots/menu.png)
+![Startmenü](static/screenshots/Screenshot_start.png)
 
 ## Funktionen
 
