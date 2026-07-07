@@ -18,7 +18,6 @@ let movingObstaclesEnabled = false;
 let obstacleDirection = 1;
 let currentEasyBackground = null;
 const snakeColors = ["red", "green", "yellow", "blue", "white", "orange", "purple", "brown", "pink", "gold", "silver", "gray", "purple"];
-let colorOffset = 0;
 let bodyColor = "darkgreen";
 let gameOverAnimation = null;
 let gameOverColorIndex = 0;
@@ -796,7 +795,6 @@ function loadHighscores() {
     fetch("/highscores")
         .then(res => res.json())
         .then(data => {
-
             highscoresDiv.innerHTML = "<h3>Top 3 Highscores</h3>";
 
             data.slice(0, 3).forEach((player, index) => {
