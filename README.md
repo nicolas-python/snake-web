@@ -36,6 +36,7 @@ Ein erweitertes Snake-Spiel für den Browser mit Spieler-System, Datenbank, Spec
     - Höchster Punkte-Multiplikator
 ### Maps und Events
 - Unterschiedliche Hintergründe je nach Schwierigkeit
+- Unterschiedliche Hindernis-Texturen je nach Map / Schwierigkeit
 - Zufälliges Secret-Map-Event
 - Bewegliche Hindernisse in der Secret Map
 
@@ -45,13 +46,13 @@ Verschiedene Spezial-Foods mit zufälligem Spawn. Der Spawn-Cooldown hängt von 
 - Easy: 20 Sekunden
 - Normal: 15 Sekunden
 - Hard: 10 Sekunden
-
-- 🟡 Punkte-Food – Gibt zusätzlich +3 Punkte.
-- 🟢 Wachstums-Food – Die Schlange wächst um 2 Blöcke.
-- 🔵 Verlangsamungs-Food – Verlangsamt die Schlange für 10 Sekunden.
-- 🟣 Gift-Food – Zieht 10 Punkte vom Score ab.
-- ⚪ Speed-Boost-Food – Erhöht die Geschwindigkeit für 10 Sekunden.
-- 🟠 Shrink-Food – Verkleinert die Schlange um 2 Blöcke.
+  ###Effekte
+  - 🟡 Punkte-Food – Gibt zusätzlich +3 Punkte.
+  - 🟢 Wachstums-Food – Die Schlange wächst um 2 Blöcke.
+  - 🔵 Verlangsamungs-Food – Verlangsamt die Schlange für 10 Sekunden.
+  - 🟣 Gift-Food – Zieht 10 Punkte vom Score ab.
+  - ⚪ Speed-Boost-Food – Erhöht die Geschwindigkeit für 10 Sekunden.
+  - 🟠 Shrink-Food – Verkleinert die Schlange um 2 Blöcke.
 
 ## Technologien
 - JavaScript (Spiel-Logik)
