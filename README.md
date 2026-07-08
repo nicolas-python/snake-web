@@ -60,7 +60,8 @@ Verschiedene Spezial-Foods mit zufälligem Spawn. Der Spawn-Cooldown hängt von 
 - Easy: 20 Sekunden
 - Normal: 15 Sekunden
 - Hard: 10 Sekunden
-  ###Effekte
+  
+  #### Effekte
   - 🟡 Punkte-Food – Gibt zusätzlich +3 Punkte.
   - 🟢 Wachstums-Food – Die Schlange wächst um 2 Blöcke.
   - 🔵 Verlangsamungs-Food – Verlangsamt die Schlange für 10 Sekunden.
