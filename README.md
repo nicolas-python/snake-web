@@ -1,7 +1,7 @@
 ## Snake Game
 Ein erweitertes Snake-Spiel für den Browser mit Spieler-System, Datenbank, Special-Food und verschiedenen Maps. Der Spieler steuert eine Schlange, die durch das Essen von Objekten wächst. Ziel ist es, möglichst viele Punkte zu sammeln, ohne mit sich selbst, Hindernissen oder dem Spielfeldrand zu kollidieren.
 
-<img src="https://github.com/user-attachments/assets/9f0db18a-d552-4fc8-afed-c180709916c8" alt="Screenshot_start" width="900">
+<img src="static/screenshots/Screenshot_start.png" alt="Screenshot Start">
 
 ## Funktionen
 
@@ -28,19 +28,31 @@ Ein erweitertes Snake-Spiel für den Browser mit Spieler-System, Datenbank, Spec
     - Keine Hindernisse
     - Niedriger Punkte-Multiplikator
     - Rasterfeld
+
+<img src="static/screenshots/Screenshot_easy.png" alt="Screenshot Start">
+<img src="static/screenshots/Screenshot_easymap2png.png" alt="Screenshot Start">
+
   ### Normal
     - Mittlere Geschwindigkeit
     - Zusätzliche Hindernisse
     - Erhöhter Punkte-Multiplikator
+
+<img src="static/screenshots/Screenshot_normal.png" alt="Screenshot Start">
+
   ### Hard
     - Höhere Startgeschwindigkeit
     - Mehr Hindernisse
     - Höchster Punkte-Multiplikator
+
+<img src="static/screenshots/Screenshot_hard.png" alt="Screenshot Start">
+
 ### Maps und Events
 - Unterschiedliche Hintergründe je nach Schwierigkeit
 - Unterschiedliche Hindernis-Texturen je nach Map / Schwierigkeit
 - Zufälliges Secret-Map-Event
 - Bewegliche Hindernisse in der Secret Map
+
+<img src="static/screenshots/Screenshot_secret.png" alt="Screenshot Start">
 
 ### Special Food System
 Verschiedene Spezial-Foods mit zufälligem Spawn. Der Spawn-Cooldown hängt von der gewählten Schwierigkeit ab:
@@ -55,6 +67,14 @@ Verschiedene Spezial-Foods mit zufälligem Spawn. Der Spawn-Cooldown hängt von 
   - 🟣 Gift-Food – Zieht 10 Punkte vom Score ab.
   - ⚪ Speed-Boost-Food – Erhöht die Geschwindigkeit für 10 Sekunden.
   - 🟠 Shrink-Food – Verkleinert die Schlange um 2 Blöcke.
+  
+  <img src="static/screenshots/Screenshot_slowfood.png" alt="Screenshot Start">
+  <img src="static/screenshots/Screenshot_slowtimer.png" alt="Screenshot Start">
+  
+
+Effekte werden zusätzlich über Floating-Messages im Spiel angezeigt.
+
+<img src="static/screenshots/Screenshot_floatingtext.png" alt="Screenshot Start">
 
 ## Technologien
 - JavaScript (Spiel-Logik)
