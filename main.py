@@ -3,6 +3,7 @@ from database import init_db, save_score, save_player, get_highscores
 
 
 app = Flask(__name__)                        #erstellt die flask-app
+init_db()                                   #tabelle erstellen
 
 @app.route('/')                                 #wenn jemand die Route '/'im Browser aufruft, wird diese Funktion ausgeführt
 def start_page():
@@ -31,5 +32,4 @@ def highscores():
     return jsonify(get_highscores())
 
 if __name__ == '__main__':                      #entscheidet ob Programm startet
-    init_db()                                   #tabelle erstellen
     app.run(debug=True)                         #sorgt für automatisches Neustarten
