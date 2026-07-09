@@ -3,6 +3,9 @@ Ein erweitertes Snake-Spiel für den Browser mit Spieler-System, Datenbank, Spec
 
 <img src="static/screenshots/Screenshot_start.png" alt="Screenshot Start">
 
+## Live Demo
+Hier spielbar : https://snake-web-0qoi.onrender.com/
+
 ## Funktionen
 
 ### Spieler-System
