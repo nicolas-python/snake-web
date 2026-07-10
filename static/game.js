@@ -50,6 +50,23 @@ const easyBtn = document.getElementById("easyBtn");
 const normalBtn = document.getElementById("normalBtn");
 const hardBtn = document.getElementById("hardBtn");
 
+function updateDifficultyButtons()
+{
+    easyBtn.classList.remove("selectedDifficulty");
+    normalBtn.classList.remove("selectedDifficulty");
+    hardBtn.classList.remove("selectedDifficulty");
+
+    if (difficulty === "easy") {
+        easyBtn.classList.add("selectedDifficulty");
+    }
+    else if (difficulty === "normal") {
+        normalBtn.classList.add("selectedDifficulty");
+    }
+    else if (difficulty === "hard") {
+        hardBtn.classList.add("selectedDifficulty");
+    }
+}
+
 document.getElementById("restartBtn").onclick = () =>
 {
     clearInterval(gameOverAnimation);
@@ -68,6 +85,9 @@ document.getElementById("menuBtn").onclick = () =>
     normalBtn.disabled = false;
     hardBtn.disabled = false;
     startGameButton.disabled = false;
+
+    difficulty = null;
+    updateDifficultyButtons()
 }
 
 
@@ -151,6 +171,7 @@ easyBtn.addEventListener("click", function()
 {
     if (gameRunning) return;
     difficulty = "easy";
+    updateDifficultyButtons();
     applyDifficulty();
     setObstacles();
 });
@@ -159,6 +180,7 @@ normalBtn.addEventListener("click", function()
 {
     if (gameRunning) return;
     difficulty = "normal";
+    updateDifficultyButtons();
     applyDifficulty();
     setObstacles();
 });
@@ -167,6 +189,7 @@ hardBtn.addEventListener("click", function()
 {
     if (gameRunning) return;
     difficulty = "hard";
+    updateDifficultyButtons();
     applyDifficulty();
     setObstacles();
 });
